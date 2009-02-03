@@ -1,0 +1,16 @@
+<div id="login_form_div">
+<h1>Login with a Twitter user name</h1>
+<%= error_messages_for :session %>
+<% form_tag session_path do -%>
+<label for="login">User name:</label><%= text_field_tag 'login' %><br class="clear_both"/>
+<label for="password">Password:</label>
+<%= password_field_tag 'password' %><br class="clear_both"/>
+<br class="clear_both"/>
+<%= submit_tag 'Login' %>
+<div id="twitter_login_info">
+	You can use your Twitter user name and password to login here.  <strong>Your password will not be saved on our servers</strong> - we only use it to make sure that you really own the Twitter user name you say you do.  No tweets will be sent from your name.
+
+</div>
+
+<% end -%>
+</div>

@@ -1,0 +1,88 @@
+
+<%= javascript_tag 'the_tag = "' + @the_tag + '"' %>
+
+<div id="content">
+	<div id="top_section">
+
+		<div id="main_tag_and_def">
+
+			<div class="main_tag">
+				<h2>Tag:</h2><span class="main_tag_text">#<%=h @the_tag%></span>
+			</div>
+			<div class="main_definition">
+				<img class="definition_quote" src="/images/bg_quote.png" alt="Definition"/>
+				<span class="main_definition_text"><%= @main_def%></span>
+			</div>
+		</div>
+
+		<div id="tags_and_defs">
+			
+			<% if @definitions != nil %>
+			<div id="alternate_defs">
+				<%	for d in @definitions	%>
+					<div class="definition">
+						<div class="gravatar">
+							<img alt="" src="<%= d.user.get_avatar_url %>"/>
+						</div>
+						<!--<div class="authority">
+							Authority:
+							<span id="defs_authority<%= d.id %>" class="def_auth"><%= d.authority %></span>
+						</div> -->
+						<span class="def_author">Added by: <%= d.user.get_display_name %></span>
+						<span class="def"><%= d.texturized_definition %></span>
+						<br class="clear_both"/>
+					</div>
+				<%	end	%>
+				<br class="clear_both"/>
+			</div>
+			<% end %>
+			
+			<%= render :partial => 'layouts/partials/add_definition_form' %>
+
+		
+		</div>
+		
+		<br class="clear_both"/>
+		<div id="comment_section">
+
+
+		</div>
+		
+	</div>
+	
+	<div id="preview_widgets">
+		
+		<div id="widget_twittertweets" class="preview_widget">
+			<a class="collapse_link" href="#" onclick="toggle_widget(this);return false;"><img class="collapse_x" src="/images/arrow_right.png" alt="x" /></a>
+			<h3>Twitter</h3><div class="loader"></div>
+			<div class="widget_content">
+		
+			
+			</div>
+			
+		</div>
+		
+		<div id="widget_flickrthumbnails" class="preview_widget">
+			<a class="collapse_link" href="#" onclick="toggle_widget(this);return false;"><img class="collapse_x" src="/images/arrow_right.png" alt="x" /></a>
+			<h3>Flickr</h3><div class="loader"></div>
+			<div class="widget_content">
+		
+			
+			</div>
+			
+		</div>
+		
+		<div id="widget_youtubevideos" class="preview_widget">
+			<a class="collapse_link" href="#" onclick="toggle_widget(this);return false;"><img class="collapse_x" src="/images/arrow_right.png" alt="x" /></a>
+			<h3>Youtube</h3><div class="loader"></div>
+			<div class="widget_content">
+		
+			
+			</div>
+			
+		</div>
+		
+	</div>
+	
+	
+</div>

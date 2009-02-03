@@ -1,0 +1,6 @@
+log/*.log
+tmp/**/*
+.DS_Store
+.hg
+.hg/*
+config/database.yml

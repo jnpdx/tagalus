@@ -1,0 +1,16 @@
+<h1>Editing definition</h1>
+
+<% form_for(@definition) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :the_definition %><br />
+    <%= f.text_field :the_definition %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @definition %> |
+<%= link_to 'Back', definitions_path %>

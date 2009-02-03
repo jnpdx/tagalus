@@ -1,0 +1,33 @@
+<div id="canvas">
+	
+<div id="header_top">	
+<div id="beta_header"><a href="/beta">Tagalus is in Beta!</a></div>
+<div id="login_header">
+	
+	<% if logged_in? %>
+		You are logged in as: <%= current_user.identity_url %> <%= link_to "Logout", '/logout' %>
+	<% else %>
+		<%= link_to "Login", '/login' %>
+	<% end %>
+	
+</div>
+</div>
+
+
+<div id="header">
+	
+	<div id="header_left">
+	<h1><a href="/" id="logo_head">@tagalus</a></h1>
+
+	<span id="header_description">Get and set definitions for #tags</span>
+	</div>
+	
+	<div id="search_box" class="yellow_box">
+	<h4>Define:</h4>
+	<form id="search_form" name="search_form" method="post" action="">
+	<input size="22" style="position: absolute;" id="suggest" name="suggest"/>
+	<input type="submit" value="Search" id="search_button"/>
+	</form>
+	</div>
+	
+</div>

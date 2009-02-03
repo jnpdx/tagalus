@@ -1,0 +1,2 @@
+module AjaxSearchHelper
+end

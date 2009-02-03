@@ -1,0 +1,43 @@
+
+<div id="welcome_mat">
+Welcome to Tagalus!  <a href='/about'>Learn what it is</a>.  Also, you can <a href="/about#twitter">use Tagalus with Twitter</a>!  Keep up with the progress with the <a href="http://blog.tagal.us/">Tagalus blog</a>.
+<br class="clear_both"/>
+</div>
+
+<%= render :partial => 'layouts/partials/add_tag_form' %>
+<br class="clear_both"/>
+
+<div id="main_tags_list">
+<% for tag in @tags %>
+	<% @definition = Definition.find(:first, :conditions => { :tag_id => tag.id }) %>
+
+	<div class="tag">
+		<span class="the_tag"><%= link_to (h tag.the_tag), ("/tag/" + tag.the_tag) %></span>
+		<span class="definition">
+		<% 
+			d = ""
+			if @definition != nil
+				d = @definition.the_definition
+			end
+		%>
+		<%=h d %>
+		</span>
+	</div>
+		
+<% end %>
+
+<div class="pagination">
+	<% if @prev_pages %>
+		<a href="?p=<%=@page - 1%>">Prev page</a>
+		<% if @next_pages %>
+		&nbsp;/&nbsp;
+		<% end %>
+	<% end %>
+	<% if @next_pages %>
+		<a href="?p=<%=@page + 1%>">Next page</a>
+	<% end %>
+</div>
+
+</div>
+
+<br />

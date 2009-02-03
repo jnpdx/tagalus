@@ -1,0 +1,33 @@
+<!--
+<% form_tag session_path do -%>
+<p><label for="login">Login</label><br/>
+<%= text_field_tag 'login' %></p>
+
+<p><label for="password">Password</label><br/>
+<%= password_field_tag 'password' %></p>
+
+<p><label for="remember_me">Remember me:</label>
+<%= check_box_tag 'remember_me' %></p>
+<label for="openid_url">OpenID URL</label><br />
+<%= text_field_tag "openid_url" %>
+
+<p><%= submit_tag 'Log in' %></p>
+<% end -%>
+-->
+
+
+<div id="login_form_div">
+<% form_tag session_path do -%>
+<fieldset id="login_form">
+<h2>OpenID Login</h2>
+<%= text_field_tag "openid_url" %>
+<%= submit_tag 'Login' %>
+</fieldset>
+<% end -%>
+	<div id="openid_info">
+	<strong>If you prefer, you can <a href="/twitter_login">use your Twitter account to login</a></strong>
+	<br/><br/>
+	If you have an account at Flickr, Wordpress.com, AOL, Livejournal, or any of <a href="http://en.wikipedia.org/wiki/List_of_OpenID_providers">these providers</a> you already have an OpenID and you can use that url to login.
+	<br/><br/>If you need an OpenID, I suggest getting one at <a href="https://www.myopenid.com/">MyOpenID</a> - it should only take you a couple of minutes to sign up.
+	</div>
+</div>
