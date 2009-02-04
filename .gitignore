@@ -4,3 +4,5 @@ tmp/**/*
 .hg
 .hg/*
 config/database.yml
+.hg*
+config/deploy.rb
