@@ -6,3 +6,4 @@ tmp/**/*
 config/database.yml
 .hg*
 config/deploy.rb
+config/deploy-slice.rb
