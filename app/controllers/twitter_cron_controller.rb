@@ -139,10 +139,12 @@ class TwitterCronController < ApplicationController
     req = Net::HTTP::Get.new(url.path + "?" + query_string)
     req.basic_auth tw_user, tw_pass
     
-    #res = Net::HTTP.start(url.host, url.port) {|http|
-    #  http.request(req)
-    #  }
-    # return res.body + '<br/>
+    if ENV['RAILS_ENV'] == 'production'
+      res = Net::HTTP.start(url.host, url.port) {|http|
+        http.request(req)
+        }
+       return res.body + '<br/>'
+    end
     
     return "sent tweet to http://twitter.com/statuses/update.json?status=#{msg}&in_reply_to_status_id=#{tweet_id} <br/>"
     
