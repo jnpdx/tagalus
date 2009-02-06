@@ -45,6 +45,12 @@ class DefinitionsController < ApplicationController
       return
     end
     
+    if @def.user_id == current_user.id
+      flash[:error] = "Sorry, you can't vote on your own definition"
+      redirect_to request.referrer
+      return
+    end
+    
     # okay, vote on it
     
     @vote = Vote.new

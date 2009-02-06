@@ -6,6 +6,16 @@ class TagsController < ApplicationController
   layout 'main_template' 
 
   def index
+    #check for the no_track flag
+    if params[:track] != nil
+      $track = false
+      cookies[:notrack] = {
+         :value => 'true',
+         :expires => 1.year.from_now,
+       }
+      
+    end
+    
     if params[:do_create] != nil
       create
       return

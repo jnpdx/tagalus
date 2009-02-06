@@ -26,5 +26,6 @@ class ApplicationController < ActionController::Base
   
   $tags_per_page = 5
   
-  
+  $track = true
+    
 end
