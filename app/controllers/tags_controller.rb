@@ -1,5 +1,7 @@
 class TagsController < ApplicationController
   before_filter :login_required, :only => [:update, :destroy]
+  include TwitterTools
+  
   
   # GET /tags
   # GET /tags.xml
@@ -179,5 +181,59 @@ class TagsController < ApplicationController
     end
   end
 
+
+  def add_tweet
+    if !logged_in?
+      flash[:error] = "You have to be logged in to do that"
+      redirect_to '/login'
+      return
+    end
+    tweet_id = params[:tweet_id]
+    the_tag = params[:the_tag]
+    add_type = params[:type]
+    
+    @tag = Tag.find_by_the_tag(the_tag)
+    
+    #get the tweet
+    tweet = get_tweet(tweet_id)
+    
+    if add_type == 'comment'
+      @comment = Comment.new
+      @comment.the_comment = tweet['text']
+      
+      meta_info = { 'added_for' => "@#{tweet['user']['screen_name']}" }
+      
+      @comment.meta_info = Marshal.dump(meta_info)
+      
+      @comment.user_id = current_user.id
+      @comment.tag_id = @tag.id
+      if @comment.save
+        flash[:notice] = "The comment was added"
+      else
+        flash[:error] = "There was an error adding that comment"
+      end
+    end
+    
+    if add_type == 'definition'
+      @definition = Definition.new
+      @definition.the_definition = tweet['text']
+      meta_info = { 'added_for' => "@#{tweet['user']['screen_name']}" }
+      
+      @definition.meta_info = Marshal.dump(meta_info)
+      @definition.user_id = current_user.id
+      @definition.tag_id = @tag.id
+      
+      if @definition.save
+        flash[:notice] = "Your definition was added"
+      else
+        flash[:error] = "There was an error adding that definition"
+      end
+    end
+    
+    
+    #flash[:notice] = "Going to add #{tweet['text']} as #{add_type} on behalf of #{tweet['user']['screen_name']}"
+    redirect_to '/tag/' + the_tag
+    
+  end
   
 end

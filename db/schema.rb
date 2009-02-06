@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090206014013) do
+ActiveRecord::Schema.define(:version => 20090206214503) do
 
   create_table "app_prefs", :force => true do |t|
     t.string   "pref_key"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20090206014013) do
     t.datetime "updated_at"
     t.integer  "tag_id",      :null => false
     t.integer  "user_id",     :null => false
+    t.string   "meta_info"
   end
 
   create_table "definitions", :force => true do |t|
@@ -33,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20090206014013) do
     t.integer  "tag_id",                        :null => false
     t.integer  "authority",      :default => 1
     t.integer  "user_id",                       :null => false
+    t.string   "meta_info"
   end
 
   create_table "open_id_authentication_associations", :force => true do |t|

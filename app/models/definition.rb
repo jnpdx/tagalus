@@ -22,4 +22,22 @@ class Definition < ActiveRecord::Base
     return old_def
   end
   
+  def attribution_text
+    to_ret = ''
+    on_behalf = ''
+    if self.meta_info != nil
+		  if (Marshal.load(self.meta_info))['added_for'] != nil
+				on_behalf = (Marshal.load(self.meta_info))['added_for']
+			end
+		end 
+		if on_behalf != '' 
+		  to_ret = "#{self.user.get_display_name} thought that this tweet from #{on_behalf} would make a good defintion"
+		else 
+		  to_ret = "Added by #{self.user.get_display_name}"
+		end 
+		to_ret += ':'
+		
+		return to_ret
+  end
+  
 end

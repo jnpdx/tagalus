@@ -28,7 +28,7 @@
 							Authority:
 							<span id="defs_authority<%= d.id %>" class="def_auth"><%= d.authority %></span>
 						</div>
-						<span class="def_author">Added by: <%= d.user.get_display_name %></span>
+						<span class="def_author"><%= d.attribution_text %></span>
 						<div class="vote">
 							<a href='/vote/<%=d.id%>'>Vote as accurate</a>
 						</div>
@@ -50,7 +50,7 @@
 						<div class="gravatar">
 							<img alt="" src="<%= c.user.get_avatar_url %>"/>
 						</div>
-						<span class="comment_author"><%= c.user.get_display_name %> said:</span>
+						<span class="comment_author"><%= c.attribution_text %></span>
 						<span class="def"><%= c.texturized_comment %></span>
 						<br class="clear_both"/>
 					</div>

@@ -25,6 +25,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'tag/:the_tag', :controller => 'tags', :action => 'show'
   map.connect 'widget/:widget_title/:the_tag', :controller => 'widget', :action => 'show'
   
+  map.connect '/add_tweet', :controller => 'tags', :action => 'add_tweet'
+  
   map.connect '/vote/:def_id', :controller => 'definitions', :action => 'vote'
   
   map.connect 'search/', :controller => 'ajax_search', :action => 'show'

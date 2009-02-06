@@ -16,6 +16,18 @@ module TwitterTools
   
   end
   
+  def get_tweet(tweet_id)
+    
+    url = "http://twitter.com/statuses/show/#{tweet_id}.json"
+      
+    user_data = Net::HTTP.get_response(URI.parse(url))
+  
+    json_data = JSON.parse(user_data.body)
+    
+    return json_data
+    
+  end
+  
   def authenticate_twitter_user(user_n,pass)
     
     url = URI.parse "http://twitter.com/account/verify_credentials.json"

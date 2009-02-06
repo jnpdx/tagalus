@@ -769,6 +769,14 @@ div.twitter_tweet {
 	
 }
 
+div.twitter_tweet div.add_buttons {
+	
+	font-size: .8em;
+	text-align: right;
+	margin-top: 2px;
+	
+}
+
 div.twitter_tweet span.tweet_text a {
 	
 	color: #666;

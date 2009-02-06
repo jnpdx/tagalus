@@ -249,6 +249,7 @@ function render_tweets(data) {
 			to_ret += 	'<img class="twitter_avatar" src="' + tweet.profile_image_url + '" alt="' + tweet.from_user + '"/>'
 			to_ret += 	'<span class="tweet_user_name"><a href="http://twitter.com/' + tweet.from_user + '/">@' + tweet.from_user + '</a></span>'
 			to_ret += 	'<span class="tweet_text"><a href="http://twitter.com/' + tweet.from_user + '/status/' + tweet.id + '" rel="nofollow">&nbsp;' + tweet.text + '</a></span><br class="clear_both"/>'
+			to_ret +=	'<div class="add_buttons">Add as: <a href="/add_tweet/?type=comment&the_tag=' + the_tag + '&tweet_id=' + tweet.id + '">comment</a> or <a href="/add_tweet/?type=definition&the_tag=' + the_tag + '&tweet_id=' + tweet.id + '">definition</a></div>'
 			to_ret += '</div>'
 			
 			
