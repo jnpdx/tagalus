@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090206001837) do
+ActiveRecord::Schema.define(:version => 20090206014013) do
 
   create_table "app_prefs", :force => true do |t|
     t.string   "pref_key"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(:version => 20090206001837) do
     t.string   "the_comment"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "tag_id",      :null => false
+    t.integer  "user_id",     :null => false
   end
 
   create_table "definitions", :force => true do |t|

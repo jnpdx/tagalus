@@ -3,7 +3,7 @@ class DefinitionsController < ApplicationController
   def create
     if !logged_in?
       cookies[:saved_def] = Marshal.dump(params)
-      flash[:error] = "You have to login before you can add a definition!"
+      flash[:error] = "You have to log in before you can add a definition!  Your definition will be added automatically when you log in"
       redirect_to '/login'
       return
     end
@@ -31,7 +31,7 @@ class DefinitionsController < ApplicationController
   
   def vote
     if !logged_in?
-      flash[:error] = "You have to login before you can vote on a definition!"
+      flash[:error] = "You have to log in before you can vote on a definition!"
       redirect_to '/login'
       return
     end

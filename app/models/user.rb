@@ -26,6 +26,9 @@ class User < ActiveRecord::Base
     if self.identity_url.index('http://twitter.com/') == 0
       return '@' + self.identity_url[19,self.identity_url.length]
     end
+    if self.login != nil
+      return self.login
+    end
     return self.identity_url
   end
   

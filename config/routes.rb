@@ -34,6 +34,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login  '/login',  :controller => 'sessions', :action => 'new'
   map.twitter_login '/twitter_login', :controller => 'sessions', :action => 'new_twitter'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy' 
+  map.user_details '/user-details', :controller => 'users', :action => 'update'
   
   #static pages
   map.connect 'about', :controller => 'static_display', :action => 'show', :to_display => 'about.html'

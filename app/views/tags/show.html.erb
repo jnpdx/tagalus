@@ -42,6 +42,25 @@
 			
 			<%= render :partial => 'layouts/partials/add_definition_form' %>
 
+			<% if @comments.length != 0 %>
+			<div id="comment_section">
+				<h4>Comments on <%= @the_tag %>:</h4>
+				<%	for c in @comments	%>
+					<div class="tag_comment">
+						<div class="gravatar">
+							<img alt="" src="<%= c.user.get_avatar_url %>"/>
+						</div>
+						<span class="comment_author"><%= d.user.get_display_name %> said:</span>
+						<span class="def"><%= c.texturized_comment %></span>
+						<br class="clear_both"/>
+					</div>
+				<%	end	%>
+				<br class="clear_both"/>
+			</div>
+			<% end %>
+			
+
+			<%= render :partial => 'layouts/partials/add_comment_form' %>
 		
 		</div>
 		

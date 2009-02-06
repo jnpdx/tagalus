@@ -1,0 +1,17 @@
+<div id="user_details">
+	<h2>User details</h2>
+	
+	<% form_for :user, @user, :url => '/edit_user' do |f| %>
+	
+		<%=f.label 'identity', 'URL: '%><%=@user.identity_url%><br class="clear_both" />
+		
+		<%= f.label 'nickname', "Nickname: "%><%= f.text_field :login, :size => 20 %><br class="clear_both" />
+		
+		<%=f.label 'email', "Email: "%><%=f.text_field :email, :size => 40 %><br class="clear_both" />
+		
+		<%= submit_tag "Update" %>
+	
+	<% end %>
+	<br class="clear_both"/>
+	
+</div>

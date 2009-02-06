@@ -1,0 +1,8 @@
+<div id="new_tag_comment_section">
+	<h4>Comment on #<%= @the_tag %>:</h4>
+	<% @comment = Comment.new %>
+	<% form_for :comment, @comment, :url => { :controller => 'comments', :action => 'create', :tag_id => @tag.id } do |f| %>
+		<%= f.text_area :the_comment %>
+		<%= submit_tag 'Submit'%>
+	<% end %>
+</div>

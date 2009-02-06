@@ -1,9 +1,8 @@
 <div id="add_new_def_form" class="yellow_box">
-	<% @d = @tag.definitions.build %>
 	<% form_for([@tag, @d], :url => {:controller => 'definitions', :action => "create", :tag_id => @tag.id, :the_tag => @the_tag }) do |f| %>
 	  <%= f.error_messages %>
 	
-	  <span id="define_form_text">Define #<%= @the_tag %> as:</span>
+	  <h4>Define #<%= @the_tag %> as:</h4>
 	
 	   <%= f.text_area :the_definition %>
 		

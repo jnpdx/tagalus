@@ -314,12 +314,14 @@ div#new_tag_div {
 	margin: 20px 80px 10px;
 	font-size: 2em;
 	text-align: center;
+	width: 950px;
 	
 }
 
+
 div#new_tag_div textarea#definition_the_definition {
 	
-	width: 280px;
+	width: 240px;
 	height: 40px;
 	padding: 10px 5px 5px 5px;
 	font-size: 18px;
@@ -331,7 +333,7 @@ div#new_tag_div input#tag_the_tag {
 	
 	font-size: 18px;
 	vertical-align: middle;
-	width: 190px;
+	width: 170px;
 	padding: 16px;
 	
 }
@@ -341,7 +343,7 @@ div#new_tag_div input#tag_submit {
 	font-size: 18px;
 	height: 50px;
 	vertical-align: middle;
-	width: 130px;
+	width: 104px;
 	
 }
 
@@ -576,6 +578,7 @@ div.tag span {
 form label {
 	
 	display: block;
+	float: left;
 	padding: 4px 0px;
 	
 }
@@ -584,6 +587,7 @@ div#add_new_def_form {
 	
 	border: 2px solid #bccde3;
 	padding: 10px;
+	margin-bottom: 10px;
 	
 }
 
@@ -600,7 +604,7 @@ div#add_new_def_form em, div#new_tag_div em {
 	
 }
 
-div#add_new_def_form textarea {
+div#add_new_def_form textarea, div#new_tag_comment_section textarea {
 	
 	width: 90%;
 	height: 140px;
@@ -642,27 +646,29 @@ div#user_details h2 {
 	
 }
 
-form#user_details_form label {
+div#user_details form label {
 	
-	width: 8em;
-	float: left;
-	padding: 0;
+	width: 6em;
 	
 }
 
-form#user_details_form {
+div#user_details form input[type='text'] {
 	
-	line-height: 2em;
+	vertical-align: middle;
+	height: 30px;
+	margin-bottom: 10px;
+	width: 280px;
+	font-size: 18px;
+	padding: 4px;
 	
 }
 
-form#user_details_form input#submit_button {
+div#user_details form input[type='submit'] {
 	
-	background: #bccde3;
-	display: block;
-	margin: 0 auto;
+	float: right;
 	
 }
+
 
 /* Preview widgets */
 
@@ -924,18 +930,6 @@ div#comment_section {
 	
 	margin-top: 20px;
 	width: 540px;
-	
-}
-
-input#comment_email {
-	
-	width: 90%;
-	
-}
-
-textarea#new_tag_comment {
-	
-	width: 90%;
 	
 }
 

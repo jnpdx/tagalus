@@ -100,6 +100,10 @@ class TagsController < ApplicationController
     
     @page_title = @the_tag
 
+    @d = @tag.definitions.build
+    
+    @comments = @tag.comments
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @tag }
@@ -130,7 +134,7 @@ class TagsController < ApplicationController
     if !logged_in?
       cookies[:saved_tag] = Marshal.dump(params[:tag])
       cookies[:saved_def] = Marshal.dump(params[:definition])
-      flash[:error] = "You have to login before you can add a tag!"
+      flash[:error] = "You have to log in before you can add a tag!  Your tag will be added automatically once you log in"
       redirect_to '/login'
       return
     end

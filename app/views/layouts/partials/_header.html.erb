@@ -5,7 +5,7 @@
 <div id="login_header">
 	
 	<% if logged_in? %>
-		You are logged in as: <%= current_user.identity_url %> <%= link_to "Logout", '/logout' %>
+		You are logged in as: <%= current_user.get_display_name %> <%=link_to "Edit details", '/user-details' %> / <%= link_to "Logout", '/logout' %>
 	<% else %>
 		<%= link_to "Login", '/login' %>
 	<% end %>
