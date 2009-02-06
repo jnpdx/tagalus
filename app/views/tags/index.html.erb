@@ -8,36 +8,44 @@ Welcome to Tagalus!  <a href='/about'>Learn what it is</a>.  Also, you can <a hr
 <br class="clear_both"/>
 
 <div id="main_tags_list">
-<% for tag in @tags %>
-	<% @definition = Definition.find(:first, :conditions => { :tag_id => tag.id }) %>
+	<% for tag in @tags %>
+		<% @definition = Definition.find(:first, :conditions => { :tag_id => tag.id }) %>
 
-	<div class="tag">
-		<span class="the_tag"><%= link_to (h tag.the_tag), ("/tag/" + tag.the_tag) %></span>
-		<span class="definition">
-		<% 
-			d = ""
-			if @definition != nil
-				d = @definition.the_definition
-			end
-		%>
-		<%=h d %>
-		</span>
-	</div>
+		<div class="tag">
+			<span class="the_tag"><%= link_to (h tag.the_tag), ("/tag/" + tag.the_tag) %></span>
+			<span class="definition">
+			<% 
+				d = ""
+				if @definition != nil
+					d = @definition.the_definition
+				end
+			%>
+			<%=h d %>
+			</span>
+		</div>
 		
-<% end %>
+	<% end %>
 
-<div class="pagination">
-	<% if @prev_pages %>
-		<a href="?p=<%=@page - 1%>">Prev page</a>
-		<% if @next_pages %>
-		&nbsp;/&nbsp;
+	<div class="pagination">
+		<% if @prev_pages %>
+			<a href="?p=<%=@page - 1%>">Prev page</a>
+			<% if @next_pages %>
+			&nbsp;/&nbsp;
+			<% end %>
 		<% end %>
-	<% end %>
-	<% if @next_pages %>
-		<a href="?p=<%=@page + 1%>">Next page</a>
-	<% end %>
+		<% if @next_pages %>
+			<a href="?p=<%=@page + 1%>">Next page</a>
+		<% end %>
+	</div>
+
 </div>
 
+<div id="frontpage_info">
+<span id="line1">Use <a id="tagalus">@tagalus</a> to</span>
+<span id="line2">get definitions for </span>
+<span id="and">and</span>
+<span id="line3">define</span>
+<span id="line4">#tags</span>
 </div>
 
 <br />

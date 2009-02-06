@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090203022259) do
+ActiveRecord::Schema.define(:version => 20090205234812) do
 
   create_table "app_prefs", :force => true do |t|
     t.string   "pref_key"
@@ -68,6 +68,11 @@ ActiveRecord::Schema.define(:version => 20090203022259) do
     t.string   "remember_token"
     t.datetime "remember_token_expires_at"
     t.string   "identity_url"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer "definition_id", :null => false
+    t.integer "user_id",       :null => false
   end
 
 end

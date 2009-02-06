@@ -69,7 +69,8 @@ class TagsController < ApplicationController
     end
     
     if @tag != nil
-      @definitions = @tag.definitions
+      #@definitions = @tag.definitions
+      @definitions = Definition.find(:all,:order => "authority DESC, created_at ASC", :conditions => { :tag_id => @tag.id })
     else 
       @definitions = nil
     end

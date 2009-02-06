@@ -29,4 +29,36 @@ class DefinitionsController < ApplicationController
     end
   end
   
+  def vote
+    if !logged_in?
+      flash[:error] = "You have to login before you can vote on a definition!"
+      redirect_to '/login'
+      return
+    end
+    
+    @def = Definition.find_by_id(params[:def_id])
+    @tag = Tag.find_by_id(@def.tag_id)
+    
+    if Vote.find(:first, :conditions => { :user_id => current_user.id, :definition_id => @def.id }) != nil
+      flash[:error] = "You've already voted on that definition!"
+      redirect_to '/tag/' + @tag.the_tag
+      return
+    end
+    
+    # okay, vote on it
+    
+    @vote = Vote.new
+    @vote.user_id = current_user.id
+    @vote.definition_id = @def.id
+    
+    @vote.save
+    
+    @def.authority = @def.authority + 1
+    @def.save
+    
+    flash[:notice] = "Your vote has been counted"
+    redirect_to '/tag/' + @tag.the_tag
+    
+  end
+  
 end

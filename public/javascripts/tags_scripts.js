@@ -16,8 +16,8 @@ youtube_data = null;
 
 var user_prefs = new Object();
 user_prefs['widgets'] = new Object();
-user_prefs.widgets['widget_flickrthumbnails'] = "false";
-user_prefs.widgets['widget_twittertweets'] = "false";
+user_prefs.widgets['widget_flickrthumbnails'] = "true";
+user_prefs.widgets['widget_twittertweets'] = "true";
 user_prefs.widgets['widget_youtubevideos'] = "false";
 user_prefs.widgets['widget_technoratilinks'] = "false";
 

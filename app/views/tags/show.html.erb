@@ -24,11 +24,14 @@
 						<div class="gravatar">
 							<img alt="" src="<%= d.user.get_avatar_url %>"/>
 						</div>
-						<!--<div class="authority">
+						<div class="authority">
 							Authority:
 							<span id="defs_authority<%= d.id %>" class="def_auth"><%= d.authority %></span>
-						</div> -->
+						</div>
 						<span class="def_author">Added by: <%= d.user.get_display_name %></span>
+						<div class="vote">
+							<a href='/vote/<%=d.id%>'>Vote as accurate</a>
+						</div>
 						<span class="def"><%= d.texturized_definition %></span>
 						<br class="clear_both"/>
 					</div>

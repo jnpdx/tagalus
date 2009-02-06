@@ -354,6 +354,60 @@ div#main_tags_list {
 	
 }
 
+div#frontpage_info {
+	/* this is where the purpose of the site goes */
+	font-size: 2.2em;
+}
+
+div#frontpage_info span {
+	
+	display: block;
+	margin-bottom: 8px;
+	width: 400px;
+	float: left;
+	
+}
+
+div#frontpage_info span#line1 {
+	
+	
+}
+
+div#frontpage_info a#tagalus {
+	
+	color: #3399FF;
+	font-weight: bold;
+	
+}
+
+div#frontpage_info span#line2 {
+	
+	margin-left: 40px;
+	
+}
+
+div#frontpage_info span#and {
+	
+	font-size: 14px;
+	margin-left: 40px;
+	color: #3399FF;
+	margin-bottom: 0px;
+	
+}
+
+div#frontpage_info span#line3 {
+	
+	margin-left: 40px;
+	
+}
+
+div#frontpage_info span#line4 {
+	
+	color: #3399FF;
+	font-style: italic;
+	
+}
+
 h3.main_tags_heading {
 	
 	float: left;
