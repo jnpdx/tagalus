@@ -1,7 +1,7 @@
 <div id="user_details">
 	<h2>User details</h2>
 	
-	<% form_for :user, @user, :url => '/edit_user' do |f| %>
+	<% form_for :user, @user, :url => '/user-details' do |f| %>
 	
 		<%=f.label 'identity', 'URL: '%><%=@user.identity_url%><br class="clear_both" />
 		

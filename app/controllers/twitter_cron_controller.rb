@@ -132,9 +132,11 @@ class TwitterCronController < ApplicationController
     
     msg = CGI.escape(msg)
     
-    url = URI.parse("http://twitter.com/statuses/update.json?status=#{msg}&in_reply_to_status_id=#{tweet_id}")
+    url = URI.parse("http://twitter.com/statuses/update.json")
     
-    req = Net::HTTP::Get.new(url.path)
+    query_string = "status=#{msg}&in_reply_to_status_id=#{tweet_id}"
+    
+    req = Net::HTTP::Get.new(url.path + "?" + query_string)
     req.basic_auth tw_user, tw_pass
     
     #res = Net::HTTP.start(url.host, url.port) {|http|

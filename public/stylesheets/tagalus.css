@@ -609,6 +609,8 @@ div#add_new_def_form textarea, div#new_tag_comment_section textarea {
 	width: 90%;
 	height: 140px;
 	margin-bottom: 10px;
+	padding: 4px;
+	font-size: 1.2em;
 	
 }
 
@@ -646,13 +648,13 @@ div#user_details h2 {
 	
 }
 
-div#user_details form label {
+div#user_details form label, div#login_form_div label {
 	
 	width: 6em;
 	
 }
 
-div#user_details form input[type='text'] {
+div#user_details form input[type='text'], div#login_form_div form input[type='text'], div#login_form_div form input[type='password'] {
 	
 	vertical-align: middle;
 	height: 30px;

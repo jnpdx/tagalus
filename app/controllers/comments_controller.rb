@@ -22,6 +22,8 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        send_admin_dm "New comment: http://tagal.us/tag/" + @tag.the_tag
+        
         flash[:notice] = 'Your comment was added'
         format.html { redirect_to '/tag/' + @tag.the_tag }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }

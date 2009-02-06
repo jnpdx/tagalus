@@ -168,6 +168,7 @@ class TagsController < ApplicationController
       if @tag.save
         @d.tag_id = @tag.id
         @d.save
+        send_admin_dm "New tag: http://tagal.us/tag/" + @tag.the_tag
         flash[:notice] = 'Your tag has been added to Tagalus!'
         format.html { redirect_to("/tag/" + @tag.the_tag) }
         format.xml  { render :xml => @tag, :status => :created, :location => @tag }

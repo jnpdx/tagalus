@@ -18,6 +18,7 @@ class DefinitionsController < ApplicationController
     if (@definition.save)
       #render :text => "saved definition"
       @tag.save
+      send_admin_dm "New definition: http://tagal.us/tag/" + @tag.the_tag
       
       flash[:notice] = "Your definition was added to #" + @tag.the_tag
       redirect_to '/tag/' + @tag.the_tag
