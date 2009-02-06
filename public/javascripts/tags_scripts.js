@@ -1,6 +1,6 @@
 /******** OPTIONS *********/
 
-var UPDATE_FREQ = 40000;
+var UPDATE_FREQ = 45000;
 var URL_BASE = '';
 
 

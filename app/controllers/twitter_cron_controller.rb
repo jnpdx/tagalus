@@ -12,7 +12,7 @@ class TwitterCronController < ApplicationController
       page = params[:p].to_i
     end
     
-    url = "http://search.twitter.com/search.json?rpp=100&q=tagalus&page=#{page}";	
+    url = "http://search.twitter.com/search.json?rpp=40&q=tagalus&page=#{page}";	
   
     search_json_data = Net::HTTP.get_response(URI.parse(url))
   
@@ -130,18 +130,19 @@ class TwitterCronController < ApplicationController
     
     require 'cgi'
     
-    msg = CGI.escape(msg)
+    #msg = CGI.escape(msg)
     
     url = URI.parse("http://twitter.com/statuses/update.json")
     
-    query_string = "status=#{msg}&in_reply_to_status_id=#{tweet_id}"
+    #query_string = "status=#{msg}&in_reply_to_status_id=#{tweet_id}"
     
-    req = Net::HTTP::Get.new(url.path + "?" + query_string)
+    req = Net::HTTP::Post.new(url.path)
+    req.set_form_data({'status' => msg, 'in_reply_to_status_id' => tweet_id})
     req.basic_auth tw_user, tw_pass
     
     if ENV['RAILS_ENV'] == 'production'
       res = Net::HTTP.start(url.host, url.port) {|http|
-        http.request(req)
+          http.request(req)
         }
        return res.body + '<br/>'
     end

@@ -43,7 +43,7 @@ module TwitterTools
     url = URI.parse "http://twitter.com/direct_messages/new.json"
     
     req = Net::HTTP::Post.new(url.path)
-    req.set_form_data({'user' => 'test_dummy','text' => CGI.escape(msg)})
+    req.set_form_data({'user' => 'test_dummy','text' => msg})
     req.basic_auth tw_user, tw_pass
 
     res = Net::HTTP.start(url.host, url.port) {|http|
