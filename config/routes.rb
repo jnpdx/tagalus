@@ -41,6 +41,9 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'beta', :controller => 'static_display', :action => 'show', :to_display => 'beta.html'
   map.connect 'terms-of-service', :controller => 'static_display', :action => 'show', :to_display => 'tos.html'
 
+  #admin
+  map.connect 'admin/:action', :controller => 'admin_controller'
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

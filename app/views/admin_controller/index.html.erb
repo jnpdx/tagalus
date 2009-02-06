@@ -1,0 +1,35 @@
+<div id="admin_screen">
+	
+	<div id="admin_new_user">
+		<h2>Create a user</h2>
+		<% @user = User.new %>
+		<% form_for :user, @user, :url => {:action => 'create_user'} do |f| %>
+			<label>Identity:</label> <%=f.text_field :identity_url %><br class="clear_both"/>
+			<label>Nickname:</label> <%=f.text_field :login %><br class="clear_both"/>
+			<label>Email:</label> <%=f.text_field :email %><br class="clear_both"/>
+			<%= submit_tag %>
+		<% end %>
+	</div>
+	
+	<div id="admin_new_definition">
+		<h2>Create a Tag/Definition</h2>
+		<% @def = Definition.new %>
+		<% @tag = Tag.new %>
+		<% @user = User.new %>
+		<% form_for :tag, :url => {:action => 'create_tagdef'} do |t| %>
+		<% fields_for @tag do |t| %>
+			<label>Tag:</label> <%= t.text_field :the_tag %><br class="clear_both"/>
+		<% end %>
+		<% fields_for @def do |d| %>
+			<label>Definition</label> <%= d.text_field :the_definition %><br class="clear_both"/>
+		<% end %>
+		<% fields_for @user do |d| %>
+			<label>User URL</label> <%= d.text_field :identity_url %><br class="clear_both"/>
+		<% end %>
+		<%= submit_tag %>
+		<%end%>
+	</div>
+	
+	
+	
+</div>
