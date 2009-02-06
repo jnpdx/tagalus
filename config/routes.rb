@@ -43,6 +43,9 @@ ActionController::Routing::Routes.draw do |map|
 
   #admin
   map.connect 'admin/:action', :controller => 'admin_controller'
+  
+  #sitemap
+  map.connect 'sitemap.xml', :controller => 'site_map', :action => 'show'
 
   # The priority is based upon order of creation: first created -> highest priority.
 

@@ -47,10 +47,12 @@ $(document).ready(function() {
 		user_prefs = JSON.parse($.cookie('user_prefs'))
 	}
 	
-	display_user_widget_prefs();
 	
-
-	setTimeout("refresh_widgets()",UPDATE_FREQ);
+	
+	if (window['the_tag'] != undefined) {
+		setTimeout("refresh_widgets()",UPDATE_FREQ);
+		display_user_widget_prefs();
+	}
 
 });
 

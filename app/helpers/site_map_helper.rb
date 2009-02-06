@@ -1,0 +1,2 @@
+module SiteMapHelper
+end
