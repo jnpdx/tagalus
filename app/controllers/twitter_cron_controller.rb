@@ -22,6 +22,9 @@ class TwitterCronController < ApplicationController
       return
     end
     
+    data['results'].reverse! #do the oldest ones first, so that they appear correctly in ordering
+    
+    
     for i in data['results']
       to_ret += i['text'] + '<br/>'
       cur_tweet = i['text']
