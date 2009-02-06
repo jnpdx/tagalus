@@ -85,7 +85,7 @@ class TagsController < ApplicationController
       @definitions = nil
     end
     
-    if @definitions != nil
+    if @definitions.length != 0
       @main_def = @definitions[0].texturized_definition
     else 
       @main_def = "This tag hasn't been defined yet - be the first one to define it by using the form below!"

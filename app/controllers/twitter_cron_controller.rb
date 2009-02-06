@@ -10,7 +10,7 @@ class TwitterCronController < ApplicationController
       page = params[:p].to_i
     end
     
-    url = "http://search.twitter.com/search.json?rpp=100&q=tagref&page=#{page}";	
+    url = "http://search.twitter.com/search.json?rpp=40&q=tagref&page=#{page}";	
   
     search_json_data = Net::HTTP.get_response(URI.parse(url))
   
@@ -86,7 +86,7 @@ class TwitterCronController < ApplicationController
       
       if @def.save
         to_ret += 'saved'
-        #to_ret += tweet_back(cur_user,tweet_id,"http://tagal.us/tag/#{the_tag} " + '#' + the_tag)
+        to_ret += tweet_back(cur_user,tweet_id,"http://tagal.us/tag/#{the_tag} " + '#' + the_tag)
       else
         #to_ret += tweet_back(cur_user,tweet_id,"There was a problem - we probably already have that definition")
       end
