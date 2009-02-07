@@ -1,4 +1,5 @@
 class Definition < ActiveRecord::Base
+  include TwitterTools
   belongs_to :tag
   belongs_to :user
   validates_presence_of :the_definition, :message => "You must enter a definition"
@@ -31,7 +32,8 @@ class Definition < ActiveRecord::Base
 			end
 		end 
 		if on_behalf != '' 
-		  to_ret = "#{self.user.get_display_name} thought that this tweet from #{on_behalf} would make a good defintion"
+		  to_ret = '<img class="subavatar" src="' + get_twitvatar_url(on_behalf[1..on_behalf.length-1]) + '"/>'
+		  to_ret += "#{self.user.get_display_name} thought that this tweet from #{on_behalf} would make a good defintion"
 		else 
 		  to_ret = "Added by #{self.user.get_display_name}"
 		end 

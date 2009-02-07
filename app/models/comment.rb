@@ -1,4 +1,5 @@
 class Comment < ActiveRecord::Base
+  include TwitterTools
   belongs_to :user
   belongs_to :tag
   validates_length_of :the_comment, :maximum => 400, :message => "Comment too long - max 280 characters"
@@ -31,7 +32,9 @@ class Comment < ActiveRecord::Base
 			end
 		end 
 		if on_behalf != '' 
-		  to_ret = "#{self.user.get_display_name} thought that this tweet from #{on_behalf} would make a good comment"
+		  to_ret = '<img class="subavatar" src="' + get_twitvatar_url(on_behalf[1..on_behalf.length-1]) + '"/>'
+		  #to_ret = '<img class="subavatar" src="' + get_twitvatar_url(on_behalf) + '"/>'
+		  to_ret += "#{self.user.get_display_name} thought that this tweet from #{on_behalf} would make a good comment"
 		else 
 		  to_ret = "#{self.user.get_display_name} said"
 		end 

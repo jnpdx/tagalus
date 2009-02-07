@@ -785,7 +785,7 @@ div.twitter_tweet span.tweet_text a {
 	
 }
 
-img.twitter_avatar {
+img.twitter_avatar, img.subavatar {
 	
 	float: left;
 	padding: 0 6px 6px 0;

@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
   
   def get_avatar_url
     
+    #return 'test'
+    
     if self.identity_url.index('http://twitter.com/') == 0
       return get_twitvatar_url(self.identity_url[19,self.identity_url.length])
       #return get_twitvatar_url('test')

@@ -80,6 +80,8 @@ class TagsController < ApplicationController
       @tag = Tag.find(:first, :conditions => { :the_tag => params[:the_tag]} )
     end
     
+    #5038675309
+    
     if @tag != nil
       #@definitions = @tag.definitions
       @definitions = Definition.find(:all,:order => "authority DESC, created_at ASC", :conditions => { :tag_id => @tag.id })
@@ -87,7 +89,7 @@ class TagsController < ApplicationController
       @definitions = nil
     end
     
-    if @definitions.length != 0
+    if @definitions != nil
       @main_def = @definitions[0].texturized_definition
     else 
       @main_def = "This tag hasn't been defined yet - be the first one to define it by using the form below!"
