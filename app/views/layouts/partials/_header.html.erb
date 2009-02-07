@@ -24,10 +24,12 @@
 	
 	<div id="search_box" class="yellow_box">
 	<h4>Define:</h4>
-	<form id="search_form" name="search_form" method="post" action="">
-	<input size="22" style="position: absolute;" id="suggest" name="suggest"/>
+	<% form_tag '/search' do %>
+	<!-- ><form id="search_form" name="search_form" method="post" action=""> -->
+	#<input size="22" style="position: absolute;" id="suggest" name="suggest"/>
 	<input type="submit" value="Search" id="search_button"/>
-	</form>
+	<!--></form> -->
+	<% end %>
 	</div>
 	
 </div>

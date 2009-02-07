@@ -29,7 +29,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.connect '/vote/:def_id', :controller => 'definitions', :action => 'vote'
   
-  map.connect 'search/', :controller => 'ajax_search', :action => 'show'
+  map.connect 'search_suggest/', :controller => 'ajax_search', :action => 'show'
+  map.connect '/search', :controller => 'ajax_search', :action => 'search'
 
 
   #map.signup  '/signup', :controller => 'users',   :action => 'new' 

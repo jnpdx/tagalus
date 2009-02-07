@@ -19,4 +19,16 @@ class AjaxSearchController < ApplicationController
     
   end
   
+  def search
+    
+    search_term = params[:suggest]
+    
+    if search_term[0] == 35
+      search_term = search_term[1..search_term.length-1]
+    end
+    
+    redirect_to '/tag/' + search_term
+    
+  end
+  
 end

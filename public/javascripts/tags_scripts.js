@@ -36,7 +36,7 @@ $(document).ready(function() {
 	
 	$('#suggest').attr('autocomplete','off');
 	$(function() {
-		$("#suggest").suggest(URL_BASE + "/search/",{
+		$("#suggest").suggest(URL_BASE + "/search_suggest/",{
 		onSelect: function() {
 				go_to_tag_search_page();
 			}
