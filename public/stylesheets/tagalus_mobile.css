@@ -392,13 +392,14 @@ div#main_tag_and_def span.main_tag_text {
 	font-size: 2.8em;
 	display: block;
 	margin-top: 10px;
-	margin-left: 80px;
+	margin-left: 20px;
 	
 	
 }
 
 div.main_tag h2 {
 	
+	display: none;
 	width: 72px;
 	float: left;
 	font-size: 1em;
@@ -411,6 +412,7 @@ div.main_definition {
 	
 	margin-top: 30px;
 	margin-bottom: 20px;
+	clear: both;
 	
 }
 

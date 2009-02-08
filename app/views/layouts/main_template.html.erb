@@ -15,9 +15,11 @@
 		<link rel="shortcut icon" href="/favicon.png" />
 
 		<% if !is_mobile? %>
-    <%= stylesheet_link_tag 'tagalus' %>
+    	<%= stylesheet_link_tag 'tagalus' %>
 		<% else %>
-		<%= stylesheet_link_tag 'tagalus_mobile'%>
+			<%= stylesheet_link_tag 'tagalus_mobile'%>
+			<meta name="viewport" content="width = 320" />
+			<meta name="viewport" content="initial-scale=2.3, user-scalable=no" />
 		<% end %>
 
 
