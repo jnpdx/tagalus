@@ -49,6 +49,18 @@ module TwitterTools
     
   end
   
+  def send_tweet(user_n,pass,msg)
+    url = URI.parse "http://twitter.com/statuses/update.json"
+    
+    req = Net::HTTP::Post.new(url.path)
+    req.set_form_data({'status' => msg})
+    req.basic_auth tw_user, tw_pass
+
+    res = Net::HTTP.start(url.host, url.port) {|http|
+      http.request(req)
+    }
+  end
+  
   def send_admin_dm(msg)
     
     tw_user = AppPref.find_by_pref_key('tw_agent_name').pref_val
