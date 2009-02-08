@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   include TwitterTools
   
   helper :all # include all helpers, all the time
+  helper_method :is_mobile?
 
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
@@ -27,5 +28,9 @@ class ApplicationController < ActionController::Base
   $tags_per_page = 5
   
   $track = true
+  
+  def is_mobile?
+    request.user_agent.include?("Mobile")
+  end
     
 end

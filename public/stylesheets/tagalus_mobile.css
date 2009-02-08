@@ -2,6 +2,12 @@ html, body, div, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, p, blockquote, 
 	 margin: 0; padding: 0;
  }
 
+h1,h2 {
+	
+	font-size: 18px;
+	
+}
+
 body {
 
 	font-size: 80%;
@@ -58,33 +64,23 @@ div.yellow_box {
 div#canvas {
 	
 	font-size: 1.4em;
-	overflow: hidden;
+	width: 320px;
 	
 
 }
 
 div#content {
 	
-	margin: 0px 50px;
-	width: 1100px;
+	margin: 0px 4px;
 	
 }
 
 /* layout */
 
-div#tags_and_defs {
-	
-	width: 540px;
-	float: left;
-	
-}
 
 div#right_sidebar {
 	
-	width: 300px;
-	float: left;
 	background: white;
-	margin-left: 20px;
 	
 }
 
@@ -111,9 +107,7 @@ div.preview_widget {
 }
 
 div#preview_widgets {
-	
-	width: 530px;
-	float: left;
+
 	
 }
 
@@ -162,14 +156,12 @@ div#addthis_button {
 div#header_top {
 	
 	height: 30px;
-	padding: 4px 20px 4px 20px;
+	padding: 4px 20px 4px 4px;
 	
 }
 
 div#header {
 	margin-bottom: 6px;
-	width: 100%;
-	height: 120px;
 	padding: 0px 0px 0px 20px;
 	background: #3399FF;
 }
@@ -183,7 +175,7 @@ div#header a {
 div#header a#logo_head {
 	
 	color: black;
-	font-size: 72px;
+	font-size: 36px;
 	font-weight: normal;
 	display: block;
 	margin-bottom: 4px;
@@ -201,7 +193,7 @@ div#header span#header_description {
 div#header_left {
 	
 	float: left;
-	margin-left: 50px;
+	margin-left: 10px;
 	
 	
 }
@@ -233,9 +225,11 @@ div#welcome_mat {
 	
 	border: 2px solid #bccde3;
 	padding: 10px;
-	margin: 56px 80px 20px 80px;
+	width: 90%;
+	margin: 6px auto 20px auto;
 	background: white;
 	text-align: justify;
+	font-size: .7em;
 	
 }
 
@@ -255,6 +249,7 @@ div#footer {
 	text-align: center;
 	margin-bottom: 20px;
 	margin-top: 20px;
+	width: 320px;
 	
 }
 
@@ -310,21 +305,18 @@ span.cur_page a {
 div#new_tag_div {
 	
 	padding: 10px;
-	margin: 20px 80px 10px;
-	font-size: 2em;
-	text-align: center;
-	width: 950px;
 	
 }
 
 
 div#new_tag_div textarea#definition_the_definition {
 	
-	width: 240px;
+	width: 90%;
 	height: 40px;
-	padding: 10px 5px 5px 5px;
+	padding: 4px;
 	font-size: 18px;
 	vertical-align: middle;
+	clear: both;
 	
 }
 
@@ -332,8 +324,9 @@ div#new_tag_div input#tag_the_tag {
 	
 	font-size: 18px;
 	vertical-align: middle;
-	width: 170px;
-	padding: 16px;
+	width: 90%;
+	padding: 4px;
+	clear: both;
 	
 }
 
@@ -342,68 +335,29 @@ div#new_tag_div input#tag_submit {
 	font-size: 18px;
 	height: 50px;
 	vertical-align: middle;
-	width: 104px;
+	width: 90%;
+	padding: 4px;
 	
 }
 
 div#main_tags_list {
 	
-	float: left;
-	width: 450px;
-	margin-right: 20px;
-	margin-left: 80px;
+	width: 90%;
+	margin-right: auto;
+	margin-left: auto;
 	
 }
 
 div#frontpage_info {
 	/* this is where the purpose of the site goes */
-	font-size: 2.2em;
+	font-size: 1em;
+	padding-left: 10px;
 }
 
 div#frontpage_info span {
 	
 	display: block;
 	margin-bottom: 8px;
-	width: 400px;
-	float: left;
-	
-}
-
-div#frontpage_info span#line1 {
-	
-	
-}
-
-div#frontpage_info a#tagalus {
-	
-	color: #3399FF;
-	font-weight: bold;
-	
-}
-
-div#frontpage_info span#line2 {
-	
-	margin-left: 40px;
-	
-}
-
-div#frontpage_info span#and {
-	
-	margin-left: 80px;
-	color: #3399FF;
-	
-}
-
-div#frontpage_info span#line3 {
-	
-	margin-left: 40px;
-	
-}
-
-div#frontpage_info span#line4 {
-	
-	color: #3399FF;
-	font-style: italic;
 	
 }
 
@@ -429,7 +383,6 @@ span.order_by_label, a.order_by_link {
 div#main_tag_and_def {
 	
 	margin: 20px 0 20px 0;
-	width: 540px;
 	
 }
 
@@ -464,7 +417,6 @@ div.main_definition {
 div#main_tag_and_def span.main_definition_text {
 	
 	color: #23446E;
-	width: 540px;
 	display: block;
 	padding-top: 10px;
 	
@@ -489,8 +441,7 @@ img.definition_quote {
 
 div#top_section {
 	
-	padding-right: 20px;
-	float: left;
+	padding-right: 4px;
 	
 }
 
@@ -852,12 +803,13 @@ br.clear_both {
 div#search_box {
 	width: 280px;
 	height: 50px;
-	float: right;
 	margin: 10px 0 0 0;
+	clear:both;
 }
 
 div#search_box h4 {
 	
+	display: none;
 	font-size: 1em;
 	font-weight: normal;
 	
@@ -866,10 +818,12 @@ div#search_box h4 {
 div#search_box input#suggest {
 	width: 150px;
 	border: 1px solid #aaa;
+	margin-top: 4px;
 }
 
 div#search_box input#search_button {
 	
+	margin-top: -4px;
 	margin-left: 170px;
 	width: 80px;
 	border: 1px solid #aaa;
@@ -938,7 +892,6 @@ div.tag_comment span.comment_author, div.definition span.def_author {
 div#comment_section {
 	
 	margin-top: 20px;
-	width: 540px;
 	
 }
 
@@ -947,7 +900,6 @@ div#comment_section {
 
 div#login_form_div {
 	
-	width: 440px;
 	margin: 20px auto;
 	background: white;
 	padding: 10px;
@@ -996,7 +948,6 @@ fieldset#login_form {
 div.message_box {
 	
 	border: 2px solid #aaa;
-	width: 400px;
 	margin: 20px auto;
 	padding: 20px;
 	text-align: center;

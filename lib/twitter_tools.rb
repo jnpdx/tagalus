@@ -6,6 +6,8 @@ module TwitterTools
   
   def get_twitvatar_url(user_n)
   
+    #return ''
+  
     url = "http://twitter.com/users/show/#{user_n}.json";	
   
     user_data = Net::HTTP.get_response(URI.parse(url))

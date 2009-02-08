@@ -13,7 +13,14 @@
  		-%>
     <title><%= title %></title>
 		<link rel="shortcut icon" href="/favicon.png" />
+
+		<% if !is_mobile? %>
     <%= stylesheet_link_tag 'tagalus' %>
+		<% else %>
+		<%= stylesheet_link_tag 'tagalus_mobile'%>
+		<% end %>
+
+
 		<%= javascript_include_tag :defaults %>
 		<%= javascript_include_tag 'tags_scripts' %>
 		<%= javascript_include_tag 'jquery.suggest' %>

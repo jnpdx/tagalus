@@ -69,7 +69,11 @@ class TwitterCronController < ApplicationController
         next
       end
       
-      the_def = words[3..(words.length - 1)].join(' ')
+      if words[2] == 'is'
+        the_def = words[3..(words.length - 1)].join(' ')
+      else
+        the_def = words[2..(words.length - 1)].join(' ')
+      end
       
       to_ret += "going to define it as: " + the_def + "<br/>"
       
