@@ -15,7 +15,7 @@ xml.urlset "xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9" do
   t = Time.now
   xml.url do
     xml.loc 'http://tagal.us'
-    xml.lastmod "#{t.year}-#{t.month}-#{t.day}"
+    xml.lastmod t.strftime("%Y-%m-%d")
     xml.changefreq 'daily'
     xml.priority '1.0'
   end
