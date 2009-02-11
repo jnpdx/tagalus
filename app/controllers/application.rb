@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   $track = true
   
   def is_mobile?
-    if cookies[:ismobile] == nil
+    if cookies['ismobile'] == nil
       if request.user_agent.include?("Mobile")
         cookies[:is_mobile] = 'true'
         return true
@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
         return false
       end
     else
-      if cookies[:ismobile] == true
+      if cookies['ismobile'] == 'true'
         return true
       else
         return false
