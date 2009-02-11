@@ -102,8 +102,11 @@ class TwitterCronController < ApplicationController
       
     end
     
-    render :text => $to_render + '<br/><br/>' + to_ret + "<br/>"
-    
+    if params[:v] != nil
+      render :text => $to_render + '<br/><br/>' + to_ret + "<br/>"
+    else
+      render :text => 'done'
+    end
     
   end
   
