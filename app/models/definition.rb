@@ -10,8 +10,10 @@ class Definition < ActiveRecord::Base
     #this will have the url parsing, tag parsing, etc 
     #require 'sanitize'
     #old_def = Sanitize.clean self.the_definition
-    old_def = self.the_definition
+    old_def = CGI::escapeHTML self.the_definition
     
+    #old_def.gsub!(/>/,'&gt;')
+    #old_def.gsub!(/</,'&lt;')
     
     #already done by h
     #old_def.gsub!(/\n/,'<br/>')
