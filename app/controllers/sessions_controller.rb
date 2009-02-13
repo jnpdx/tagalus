@@ -16,47 +16,48 @@ class SessionsController < ApplicationController
   end
   
   def twitter_oauth_callback
-    @request_token = OAuth::RequestToken.new(UsersController.consumer,
-                                             session[:request_token],
-                                             session[:request_token_secret])
+     @request_token = OAuth::RequestToken.new(UsersController.consumer,
+                                              session[:request_token],
+                                              session[:request_token_secret])
 
-    # Exchange the request token for an access token.
-    @access_token = @request_token.get_access_token
+     # Exchange the request token for an access token.
+     @access_token = @request_token.get_access_token
 
-    @response = UsersController.consumer.request(:get, '/account/verify_credentials.json',
-                                                 @access_token, { :scheme => :query_string })
-    case @response
-      when Net::HTTPSuccess
-        user_info = JSON.parse(@response.body)
+     @response = UsersController.consumer.request(:get, '/account/verify_credentials.json',
+                                                  @access_token, { :scheme => :query_string })
+     
+     case @response
+       when Net::HTTPSuccess
+          user_info = JSON.parse(@response.body)
 
-        unless user_info['screen_name']
+          unless user_info['screen_name']
+            flash[:notice] = "Authentication failed"
+            redirect_to '/oauth_twitter'
+            return
+          end
+
+          # We have an authorized user, save the information to the database.
+          @user = User.find_or_initialize_by_identity_url('http://twitter.com/' + user_info['screen_name'])
+
+          @user.oauth_token = @access_token.token
+          @user.oauth_secret = @access_token.secret
+
+          @user.save!
+
+          # Redirect to the show page
+          #redirect_to(@user)
+          redirect_to '/'
+        else
+          RAILS_DEFAULT_LOGGER.error "Failed to get user info via OAuth"
+          # The user might have rejected this application. Or there was some other error during the request.
           flash[:notice] = "Authentication failed"
           redirect_to '/oauth_twitter'
           return
         end
-
-        # We have an authorized user, save the information to the database.
-        @user = User.find_or_initialize_by_identity_url('http://twitter.com/' + user_info['screen_name'])
-        
-        @user.oauth_token = @access_token.token
-        @user.oauth_secret = @access_token.secret
-        
-        @user.save!
-
-        # Redirect to the show page
-        #redirect_to(@user)
-        redirect_to '/'
-      else
-        RAILS_DEFAULT_LOGGER.error "Failed to get user info via OAuth"
-        # The user might have rejected this application. Or there was some other error during the request.
-        flash[:notice] = "Authentication failed"
-        redirect_to '/oauth_twitter'
-        return
-      end
-    end
-
+     
+     
   end
-
+ 
   
   
   
@@ -99,9 +100,6 @@ class SessionsController < ApplicationController
     end
   end
   
-  def twitter_oauth_authentication()
-    
-  end
   
   def twitter_authentication(user_n,pass)
     if authenticate_twitter_user(user_n,pass)
