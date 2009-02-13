@@ -6,6 +6,7 @@ require 'openid'
 require 'twitter_tools'
 require 'email_tools'
 require 'net/http'
+require 'oauth'
 
 class ApplicationController < ActionController::Base
   include AuthenticatedSystem

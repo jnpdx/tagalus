@@ -63,8 +63,8 @@ class UsersController < ApplicationController
   #oAuth stuff
   def self.consumer
     # The readkey and readsecret below are the values you get during registration
-    OAuth::Consumer.new(AppPref.find(:first,{:pref_key => "oauth_consumer_key"}).pref_val,
-                        AppPref.find(:first,{:pref_key => "oauth_consumer_secret"}).pref_val,
+    OAuth::Consumer.new(AppPref.find_by_pref_key('oauth_consumer_key').pref_val,
+                        AppPref.find_by_pref_key('oauth_consumer_secret').pref_val,
                         { :site=>"http://twitter.com" })
   end
   
