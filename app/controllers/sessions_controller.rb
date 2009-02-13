@@ -30,8 +30,10 @@ class SessionsController < ApplicationController
        when Net::HTTPSuccess
           user_info = JSON.parse(@response.body)
 
+          
+
           unless user_info['screen_name']
-            flash[:notice] = "Authentication failed"
+            flash[:error] = "Authentication failed - no user info"
             redirect_to '/oauth_twitter'
             return
           end
@@ -50,7 +52,7 @@ class SessionsController < ApplicationController
         else
           RAILS_DEFAULT_LOGGER.error "Failed to get user info via OAuth"
           # The user might have rejected this application. Or there was some other error during the request.
-          flash[:notice] = "Authentication failed"
+          flash[:error] = "Authentication failed"
           redirect_to '/oauth_twitter'
           return
         end
