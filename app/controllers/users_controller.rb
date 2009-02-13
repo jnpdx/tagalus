@@ -58,5 +58,24 @@ class UsersController < ApplicationController
     end
     
   end
+  
+  
+  #oAuth stuff
+  def self.consumer
+    # The readkey and readsecret below are the values you get during registration
+    OAuth::Consumer.new(AppPref.find(:first,{:pref_key => "oauth_consumer_key"}).pref_val,
+                        AppPref.find(:first,{:pref_key => "oauth_consumer_secret"}).pref_val,
+                        { :site=>"http://twitter.com" })
+  end
+  
+  def oauth_create
+      @request_token = UsersController.consumer.get_request_token
+      session[:request_token] = @request_token.token
+      session[:request_token_secret] = @request_token.secret
+      # Send to twitter.com to authorize
+      redirect_to @request_token.authorize_url
+      return
+  end
+  
 
 end

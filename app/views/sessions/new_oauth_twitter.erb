@@ -1,0 +1,15 @@
+<h1>Twitter!  OAuth!</h1>
+<div id="login_form_div">
+<h1>Login with a Twitter user name</h1>
+<%= error_messages_for :session %>
+<% form_tag '/start_oath' do -%>
+
+<%= submit_tag 'Login' %>
+<div id="twitter_login_info">
+
+Twitter and Oauth
+
+</div>
+
+<% end -%>
+</div>
