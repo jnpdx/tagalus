@@ -36,9 +36,11 @@ class SessionsController < ApplicationController
         end
 
         # We have an authorized user, save the information to the database.
-        @user = User.new({ :identity_url => 'http://twitter.com/' + user_info['screen_name'],
-                           :oauth_token => @access_token.token,
-                           :oauth_secret => @access_token.secret })
+        @user = User.find_or_initialize_by_identity_url('http://twitter.com/' + user_info['screen_name'])
+        
+        @user.oauth_token = @access_token.token
+        @user.oauth_secret = @access_token.secret
+        
         @user.save!
 
         # Redirect to the show page
