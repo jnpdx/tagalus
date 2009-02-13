@@ -38,7 +38,7 @@ ActionController::Routing::Routes.draw do |map|
   map.twitter_login '/twitter_login', :controller => 'sessions', :action => 'new_twitter'
   map.oauth_twitter_login '/oauth_twitter', :controller => 'sessions', :action => 'new_oauth_twitter'
   map.start_oauth '/start_oauth', :controller => 'users', :action => 'oauth_create'
-  map.oauth_callback 'oath_callback', :controller => 'sessions', :action => 'twitter_oauth_callback'
+  map.oauth_callback 'oauth_callback', :controller => 'sessions', :action => 'twitter_oauth_callback'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy' 
   map.user_details '/user-details', :controller => 'users', :action => 'update'
   
