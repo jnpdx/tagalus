@@ -46,9 +46,12 @@ class SessionsController < ApplicationController
 
           @user.save!
 
+          self.current_user = @user
+          successful_login
+
           # Redirect to the show page
           #redirect_to(@user)
-          redirect_to '/'
+          #redirect_to '/'
         else
           RAILS_DEFAULT_LOGGER.error "Failed to get user info via OAuth"
           # The user might have rejected this application. Or there was some other error during the request.
