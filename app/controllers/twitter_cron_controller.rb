@@ -27,7 +27,7 @@ class TwitterCronController < ApplicationController
     
     for i in data['results']
       to_ret += i['text'] + '<br/>'
-      cur_tweet = i['text']
+      cur_tweet = CGI::unescapeHTML i['text']
       cur_user = i['from_user']
       tweet_id = i['id']
       
@@ -36,7 +36,7 @@ class TwitterCronController < ApplicationController
     
       if TweetChecked.find_by_tweet_id(i['id']).nil?
         t = TweetChecked.new(:tweet_id => tweet_id)
-        t.save
+        #t.save
         to_ret += "made new object and saved<br/>"
       else
         to_ret += "Already checked this one!<br/>"
@@ -135,7 +135,7 @@ class TwitterCronController < ApplicationController
     
     for i in data['results']
       to_ret += i['text'] + '<br/>'
-      cur_tweet = i['text']
+      cur_tweet = CGI::unescapeHTML i['text']
       cur_user = i['from_user']
       tweet_id = i['id']
       
