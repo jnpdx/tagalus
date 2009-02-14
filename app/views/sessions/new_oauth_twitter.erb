@@ -1,13 +1,13 @@
-<h1>Twitter!  OAuth!</h1>
 <div id="login_form_div">
-<h1>Login with a Twitter user name</h1>
+<h1>Login to Twitter with OAuth</h1>
 <%= error_messages_for :session %>
 <% form_tag '/start_oauth' do -%>
 
 <%= submit_tag 'Login' %>
 <div id="twitter_login_info">
 
-Twitter and Oauth
+We're going to send you over to Twitter, where you can enter your password there.  Once they confirm your login, they'll send you back to Tagalus.  Using OAuth means you don't have to give your password to third-party sites!<br/>
+This is still a Beta feature, so please let us know (tagalus AT gmail) if something goes awry.
 
 </div>
 
