@@ -8,9 +8,9 @@ class Comment < ActiveRecord::Base
   
   def texturized_comment
     #this will have the url parsing, tag parsing, etc 
-    require 'sanitize'
-    old = Sanitize.clean self.the_comment
-    #old = CGI::escapeHTML self.the_comment
+    #require 'sanitize'
+    #old = Sanitize.clean self.the_comment
+    old = CGI::escapeHTML self.the_comment
     
     
     #already done by h
