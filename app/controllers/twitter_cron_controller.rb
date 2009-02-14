@@ -36,7 +36,7 @@ class TwitterCronController < ApplicationController
     
       if TweetChecked.find_by_tweet_id(i['id']).nil?
         t = TweetChecked.new(:tweet_id => tweet_id)
-        #t.save
+        t.save
         to_ret += "made new object and saved<br/>"
       else
         to_ret += "Already checked this one!<br/>"
