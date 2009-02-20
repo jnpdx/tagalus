@@ -160,7 +160,7 @@ class TwitterCronController < ApplicationController
         next
       end
       
-      if (words[1] != 'define') && (words[1] != 'def')
+      if (words[1].downcase != 'define') && (words[1].downcase != 'def')
         to_ret += "not defining<br/>"
         next
       end
