@@ -150,7 +150,7 @@ class TwitterCronController < ApplicationController
       
       words = cur_tweet.split(' ')
       
-      if (words[0] != "@tagalus")
+      if words[0].index("tagalus") == nil
         to_ret += "Not to me<br/>"
         next
       end
