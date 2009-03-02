@@ -14,7 +14,11 @@ module TwitterTools
   
     json_data = JSON.parse(user_data.body)
     
-    return json_data['profile_image_url']
+    if json_data['profile_image_url'] != nil
+      return json_data['profile_image_url']
+    else 
+      return ''
+    end
   
   end
   
