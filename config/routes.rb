@@ -3,7 +3,9 @@ ActionController::Routing::Routes.draw do |map|
   #API
   map.connect ':data_type/:data_name/:action.:format', :controller => 'api', :conditions => { :subdomain => 'api' }
   map.connect ':data_type/:data_name/:action', :controller => 'api', :format => 'json', :conditions => { :subdomain => 'api' }
-  map.connect ':data_type/create', :controller => 'api', :action => 'create', :requirements => { :method => :post }, :conditions => { :subdomain => 'api' }
+  map.connect ':data_type/create.:format', :controller => 'api', :action => 'create', :requirements => { :method => :post }, :conditions => { :subdomain => 'api' }
+  map.connect ':data_type/create', :controller => 'api', :action => 'create', :format => 'json', :requirements => { :method => :post }, :conditions => { :subdomain => 'api' }
+  
   map.connect '*other.:format', :controller => 'api', :action => "api_error", :conditions => { :subdomain => 'api' }
   map.connect '*other', :controller => 'api', :action => "api_error", :format => 'json', :conditions => { :subdomain => 'api' }
 
