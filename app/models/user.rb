@@ -51,6 +51,15 @@ class User < ActiveRecord::Base
     
     return 'http://www.gravatar.com/avatar/' + digest + '?s=36&amp;d=identicon'
   end
+  
+  def create_api_key
+    self.api_key = Time.now.to_i.to_s + gen_key = ActiveSupport::SecureRandom.hex(6) 
+  end
+  
+  def create_api_key!
+    self.create_api_key
+    self.save
+  end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
