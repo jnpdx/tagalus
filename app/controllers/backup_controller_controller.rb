@@ -13,7 +13,9 @@ class BackupControllerController < ApplicationController
     
     backup_location = AppPref.find_by_pref_key('backup_location').pref_val
     
-    render :file => backup_location, :content_type => 'application/x-compressed'
+    #render :file => backup_location, :content_type => 'application/x-compressed'
+    
+    send_file backup_location, :type => 'application/x-compressed'
     
   end
 
