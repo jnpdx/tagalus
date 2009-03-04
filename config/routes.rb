@@ -55,6 +55,9 @@ ActionController::Routing::Routes.draw do |map|
 
   #backup
   map.connect 'backup_db', :controller => 'backup_controller', :action => 'download_backup'
+  
+  #API
+  map.connect ':data_type/:data_name/:action.:format', :controller => 'api', :conditions => { :subdomain => 'api' }
 
   # The priority is based upon order of creation: first created -> highest priority.
 
