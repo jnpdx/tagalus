@@ -53,6 +53,9 @@ ActionController::Routing::Routes.draw do |map|
   #sitemap
   map.connect 'sitemap.xml', :controller => 'site_map', :action => 'show'
 
+  #backup
+  map.connect 'backup_db', :controller => 'backup_controller', :action => 'download_backup'
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
