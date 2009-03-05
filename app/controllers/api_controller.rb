@@ -30,6 +30,9 @@ class ApiController < ApplicationController
     self.send("api_error_" + @api_version,m,e)
   end
   
+  
+  ####### API VERSION 0001 #########
+  
   def show_0001
     
     data_obj = nil
