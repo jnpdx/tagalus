@@ -2,7 +2,7 @@ class Comment < ActiveRecord::Base
   include TwitterTools
   belongs_to :user
   belongs_to :tag
-  validates_length_of :the_comment, :maximum => 400, :message => "Comment too long - max 280 characters"
+  validates_length_of :the_comment, :maximum => 280, :message => "Comment too long - max 280 characters"
   validates_presence_of :the_comment
   validates_uniqueness_of :the_comment
   

@@ -44,7 +44,7 @@ class ApiController < ApplicationController
         data_obj = Tag.find_by_the_tag(data_name)
         if data_obj
           d = Definition.find(:first, :conditions => { :tag_id => data_obj.id}, :order => 'authority DESC')
-          data_obj = [data_obj, d]
+          data_obj =  { 'tags' => data_obj, 'definitions' => d }
         end
       when 'definition'
         data_obj = Definition.find(:all, :conditions => { :tag_id => data_name}, :order => 'authority DESC')
@@ -110,7 +110,7 @@ class ApiController < ApplicationController
          return
        end
        
-       to_render = [t, d]
+       to_render = { 'tags' => t, 'definitions' => d }
      when 'definition'
        d = Definition.new
        begin
