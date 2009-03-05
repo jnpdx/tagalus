@@ -69,6 +69,7 @@ class ApiController < ApplicationController
          t = Tag.find(params[:tag_id])
        rescue ActiveRecord::RecordNotFound
          api_error "Couldn't find tag"
+         return
        end
        d.tag_id = params[:tag_id]
        d.the_definition = params[:the_definition]
@@ -113,11 +114,10 @@ class ApiController < ApplicationController
    end
   
   def api_error msg = nil, errors = nil
+    
     if msg == nil
       msg = "Unknown API error"
     end
-    
-    msg = { :api_error => msg, :errors => errors }
 
     
     respond_to do |format|
@@ -125,6 +125,15 @@ class ApiController < ApplicationController
       format.xml { render :xml => msg.to_xml }
       format.text { render :text => msg }
     end
+  end
+  
+end
+
+class APIError
+  attr_accessor :message, :errors
+  
+  def error_data 
+    [{:message => @message, :errors => @errors }]
   end
   
 end
