@@ -11,6 +11,10 @@ class ApiController < ApplicationController
       case params[:data_type]
       when 'tag'
         data_obj = Tag.find_by_the_tag(data_name)
+        if data_obj
+          d = Definition.find(:first, :conditions => { :tag_id => data_obj.id}, :order => 'authority DESC')
+          data_obj = [data_obj, d]
+        end
       when 'definition'
         data_obj = Definition.find(:all, :conditions => { :tag_id => data_name}, :order => 'authority DESC')
       when 'comment'
@@ -62,6 +66,19 @@ class ApiController < ApplicationController
          api_error "Couldn't save tag", t.errors
          return
        end
+       
+       d = Definition.new
+       
+       d.the_definition = params[:the_definition]
+       d.tag_id = t.id
+       d.user_id = api_user.id
+       
+       if !d.save
+         api_error "Couldn't save definition - tag not saved either", d.errors
+         t.destroy
+         return
+       end
+       
        to_render = t
      when 'definition'
        d = Definition.new
@@ -89,6 +106,7 @@ class ApiController < ApplicationController
           t = Tag.find(params[:tag_id])
         rescue ActiveRecord::RecordNotFound
           api_error "Couldn't find tag"
+          return
         end
         d.tag_id = params[:tag_id]
         d.the_comment = params[:the_comment]
@@ -113,12 +131,22 @@ class ApiController < ApplicationController
      
    end
   
-  def api_error msg = nil, errors = nil
+  def api_error message = nil, errors = nil
     
-    if msg == nil
-      msg = "Unknown API error"
+    if message == nil
+      message = "Unknown API error"
     end
 
+    errors_list = nil
+    
+    if errors != nil
+      errors_list = []
+      errors.each{ |attrib,err_msg|
+        errors_list << { :attribute => attrib, :error_message => err_msg }
+      }
+    end
+
+    msg = { :error => message, :errors => errors_list }
     
     respond_to do |format|
       format.json { render :json => msg.to_json }
@@ -129,11 +157,3 @@ class ApiController < ApplicationController
   
 end
 
-class APIError
-  attr_accessor :message, :errors
-  
-  def error_data 
-    [{:message => @message, :errors => @errors }]
-  end
-  
-end

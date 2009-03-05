@@ -205,7 +205,16 @@ class TwitterCronController < ApplicationController
       
       to_ret += "going to define it as: " + the_def + "<br/>"
       
-      @tag = Tag.find_or_create_by_the_tag(the_tag)
+      new_tag = false
+      @tag = nil
+      
+      begin
+        @tag = Tag.find_by_the_tag(the_tag)
+      rescue ActiveRecord::RecordNotFound
+        new_tag = true
+        @tag = Tag.new(:the_tag => the_tag)
+      end
+      
       @user = User.find_or_create_by_identity_url('http://twitter.com/' + cur_user)
       
       
@@ -213,6 +222,7 @@ class TwitterCronController < ApplicationController
       
       
       if @def.save
+        @tag.save
         to_ret += 'saved'
         to_ret += tweet_back(cur_user,tweet_id,"http://tagal.us/tag/#{the_tag} " + '#' + the_tag)
       else
