@@ -123,12 +123,16 @@ class ApiController < ApplicationController
      when 'definition'
        d = Definition.new
        begin
-         t = Tag.find(params[:tag_id])
+         if params[:tag_id] != nil
+           t = Tag.find(params[:tag_id])
+         else
+           t = Tag.find_by_the_tag(params[:the_tag])
+         end
        rescue ActiveRecord::RecordNotFound
          api_error "Couldn't find tag"
          return
        end
-       d.tag_id = params[:tag_id]
+       d.tag_id = t.id
        d.the_definition = params[:the_definition]
        d.user_id = api_user.id
        d.authority = 1
@@ -143,12 +147,16 @@ class ApiController < ApplicationController
      when 'comment'
        d = Comment.new
         begin
-          t = Tag.find(params[:tag_id])
+          if params[:tag_id] != nil
+             t = Tag.find(params[:tag_id])
+           else
+             t = Tag.find_by_the_tag(params[:the_tag])
+           end
         rescue ActiveRecord::RecordNotFound
           api_error "Couldn't find tag"
           return
         end
-        d.tag_id = params[:tag_id]
+        d.tag_id = t.id
         d.the_comment = params[:the_comment]
         d.user_id = api_user.id
 
