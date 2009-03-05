@@ -5,6 +5,9 @@
 	
 		<%=f.label 'identity', 'URL: '%><%=@user.identity_url%><br class="clear_both" />
 		
+		<%=f.label 'api-key', 'API-Key: '%><%=@user.api_key%> - <a href="?new_api_key=true">Generate new key</a><br class="clear_both" /><br/>
+		
+		
 		<%= f.label 'nickname', "Nickname: "%><%= f.text_field :login, :size => 20 %><br class="clear_both" />
 		
 		<%=f.label 'email', "Email: "%><%=f.text_field :email, :size => 40 %><br class="clear_both" />

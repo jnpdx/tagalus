@@ -118,6 +118,15 @@ class ApiController < ApplicationController
         end
 
         to_render = d
+     when 'user'    
+       begin
+         u = User.find(data_name)
+       rescue ActiveRecord::RecordNotFound
+         api_error "Couldn't find user"
+         return
+       end
+       to_render = { :id => u.id, :identity_url => u.identity_url }
+    
      else
        api_error "Unknown data type"
        return

@@ -31,6 +31,11 @@ class UsersController < ApplicationController
     
     @user = User.find(current_user.id)
     
+    if (@user.api_key == nil) || (params[:new_api_key] != nil)
+      #generate an api key for the user
+      @user.create_api_key!
+    end
+    
     if params[:user] != nil
       
       try_save = true
