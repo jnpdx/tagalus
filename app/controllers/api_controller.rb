@@ -1,8 +1,36 @@
 class ApiController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  before_filter :get_version
   
+  def get_version
+    $min_version = '0001'
+    $latest_version = '0001'
+    @api_version = $latest_version
+    
+    req_version = params[:api_version]
+    
+    if req_version != nil
+      if (req_version.to_i < $min_version.to_i) || (req_version.to_i > $latest_version.to_i)
+        api_error "Unsupported API version"
+        return
+      end
+      @api_version = req_version
+    end
+  end
   
   def show
+    self.send("show_" + @api_version)
+  end
+  
+  def create
+    self.send("create_" + @api_version)
+  end
+  
+  def api_error m = nil, e = nil
+    self.send("api_error_" + @api_version,m,e)
+  end
+  
+  def show_0001
     
     data_obj = nil
     data_name = params[:data_name]
@@ -41,7 +69,7 @@ class ApiController < ApplicationController
     
   end
   
-  def create
+  def create_0001
 
     to_render = nil
 
@@ -140,7 +168,7 @@ class ApiController < ApplicationController
      
    end
   
-  def api_error message = nil, errors = nil
+  def api_error_0001 message = nil, errors = nil
     
     if message == nil
       message = "Unknown API error"
