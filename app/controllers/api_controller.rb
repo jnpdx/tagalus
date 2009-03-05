@@ -11,7 +11,7 @@ class ApiController < ApplicationController
     
     if req_version != nil
       if (req_version.to_i < $min_version.to_i) || (req_version.to_i > $latest_version.to_i)
-        api_error "Unsupported API version"
+        api_error "Unsupported API version", [{:attribute => "max_api_version",:error_message => $latest_version}, {:attribute => "min_api_version",:error_message => $min_version}]
         return
       end
       @api_version = req_version
@@ -178,9 +178,15 @@ class ApiController < ApplicationController
     
     if errors != nil
       errors_list = []
-      errors.each{ |attrib,err_msg|
-        errors_list << { :attribute => attrib, :error_message => err_msg }
-      }
+      
+      if errors.class == ActiveRecord::Errors
+        errors.each{ |attrib,err_msg|
+          errors_list << { :attribute => attrib, :error_message => err_msg }
+        }
+      else
+        errors_list = errors
+      end
+      
     end
 
     msg = { :error => message, :errors => errors_list }
