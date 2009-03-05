@@ -7,7 +7,7 @@ if cookies['notrack'] != nil
 	$track = false
 end
 %>
-<!-->
+<% if ENV['RAILS_ENV'] == 'production' %>
 	<script type="text/javascript">
 	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -17,4 +17,4 @@ end
 	var pageTracker = _gat._getTracker("UA-4159233-4");
 	pageTracker._trackPageview();
 	} catch(err) {}</script>
--->
+<% end %>
