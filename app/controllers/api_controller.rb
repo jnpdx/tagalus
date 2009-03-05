@@ -110,7 +110,7 @@ class ApiController < ApplicationController
          return
        end
        
-       to_render = t
+       to_render = [t, d]
      when 'definition'
        d = Definition.new
        begin
