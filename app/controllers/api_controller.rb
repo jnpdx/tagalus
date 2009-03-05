@@ -48,9 +48,15 @@ class ApiController < ApplicationController
           data_obj = to_ret.merge ({'definition' => d.attributes})
         end
       when 'definition'
-        data_obj = Definition.find(:all, :conditions => { :tag_id => data_name}, :order => 'authority DESC')
+        t = Tag.find_by_the_tag(data_name)
+        if t
+          data_obj = Definition.find(:all, :conditions => { :tag_id => t.id}, :order => 'authority DESC')
+        end
       when 'comment'
-        data_obj = Comment.find(:all, :conditions => { :tag_id => data_name})
+        t = Tag.find_by_the_tag(data_name)
+        if t
+          data_obj = Comment.find(:all, :conditions => { :tag_id => t.id})
+        end
       when 'user'
         u = User.find(data_name)
         if u != nil
@@ -166,14 +172,6 @@ class ApiController < ApplicationController
         end
 
         to_render = d
-     when 'user'    
-       begin
-         u = User.find(data_name)
-       rescue ActiveRecord::RecordNotFound
-         api_error "Couldn't find user"
-         return
-       end
-       to_render = { :id => u.id, :identity_url => u.identity_url }
     
      else
        api_error "Unknown data type"
