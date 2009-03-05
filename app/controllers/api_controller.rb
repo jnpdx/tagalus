@@ -44,7 +44,8 @@ class ApiController < ApplicationController
         data_obj = Tag.find_by_the_tag(data_name)
         if data_obj
           d = Definition.find(:first, :conditions => { :tag_id => data_obj.id}, :order => 'authority DESC')
-          data_obj =  { 'tags' => data_obj, 'definitions' => d }
+          to_ret = data_obj.attributes
+          data_obj = to_ret.merge ({'definition' => d.attributes})
         end
       when 'definition'
         data_obj = Definition.find(:all, :conditions => { :tag_id => data_name}, :order => 'authority DESC')
@@ -110,7 +111,15 @@ class ApiController < ApplicationController
          return
        end
        
-       to_render = { 'tags' => t, 'definitions' => d }
+       to_ret = t.attributes
+       to_render = to_ret.merge ({'definition' => d.attributes})
+       
+       
+       
+       #to_render = { 'tags' => t, 'definitions' => d }
+       #to_render = ApiAccessor.new
+       #to_render.tag = t
+       #to_render.definition = d
      when 'definition'
        d = Definition.new
        begin
@@ -203,3 +212,6 @@ class ApiController < ApplicationController
   
 end
 
+class TagReturn
+  attr_accessor :tag, :definition
+end
