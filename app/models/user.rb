@@ -53,12 +53,18 @@ class User < ActiveRecord::Base
   end
   
   def create_api_key
-    self.api_key = Time.now.to_i.to_s + gen_key = ActiveSupport::SecureRandom.hex(6) 
+    if (self.email != nil) && (self.email != '')
+      self.api_key = Time.now.to_i.to_s + gen_key = ActiveSupport::SecureRandom.hex(6)
+    end
+    return true 
   end
   
   def create_api_key!
-    self.create_api_key
-    self.save
+    if self.create_api_key
+      self.save
+      return true
+    end
+    return false
   end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.

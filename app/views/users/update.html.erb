@@ -5,7 +5,13 @@
 	
 		<%=f.label 'identity', 'URL: '%><%=@user.identity_url%><br class="clear_both" />
 		
-		<%=f.label 'api-key', 'API-Key: '%><%=@user.api_key%><br/><a style="font-size: .8em" href="?new_api_key=true">Generate new key</a><br class="clear_both" /><br/>
+		<%=f.label 'api-key', 'API-Key: '%>
+		<% if @user.api_key != nil %>
+		<%=@user.api_key%><br/><a style="font-size: .8em" href="?new_api_key=true">Generate new key</a>
+		<% else %>
+		<span style="font-size: .8em">(You must enter an e-mail address to obtain an API key)</span>
+		<% end %>
+		<br class="clear_both" /><br/>
 		
 		
 		<%= f.label 'nickname', "Nickname: "%><%= f.text_field :login, :size => 20 %><br class="clear_both" />

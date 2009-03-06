@@ -31,10 +31,7 @@ class UsersController < ApplicationController
     
     @user = User.find(current_user.id)
     
-    if (@user.api_key == nil) || (params[:new_api_key] != nil)
-      #generate an api key for the user
-      @user.create_api_key!
-    end
+    
     
     if params[:user] != nil
       
@@ -52,6 +49,10 @@ class UsersController < ApplicationController
       @user.login = params[:user][:login]
       @user.email = params[:user][:email]
     
+      if (@user.email == nil) || (@user.email == '')
+        @user.api_key = nil
+      end
+    
       if try_save
         if @user.save
           flash[:notice] = "Your information was updated"
@@ -61,6 +62,13 @@ class UsersController < ApplicationController
       end
     
     end
+    
+    if (@user.api_key == nil) || (params[:new_api_key] != nil)
+      #generate an api key for the user
+      @user.create_api_key!
+    end
+    
+    
     
   end
   
