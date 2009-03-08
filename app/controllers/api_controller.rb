@@ -41,10 +41,13 @@ class ApiController < ApplicationController
     begin
       case params[:data_type]
       when 'tag'
-        data_obj = Tag.find_by_the_tag(data_name)
-        if data_obj
-          d = Definition.find(:first, :conditions => { :tag_id => data_obj.id}, :order => 'authority DESC')
-          to_ret = data_obj.attributes
+        t = Tag.find_by_the_tag(data_name)
+        if t
+          to_ret = t.attributes
+          d = Definition.find(:first, :conditions => { :tag_id => t.id}, :order => 'authority DESC')
+          if t.geo_location
+            to_ret.merge({'definition' => t.geo_location.attributes})
+          end
           data_obj = to_ret.merge ({'definition' => d.attributes})
         end
       when 'definition'

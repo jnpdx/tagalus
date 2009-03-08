@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090304220315) do
+ActiveRecord::Schema.define(:version => 20090308182223) do
 
   create_table "app_prefs", :force => true do |t|
     t.string   "pref_key"
@@ -35,6 +35,18 @@ ActiveRecord::Schema.define(:version => 20090304220315) do
     t.integer  "authority",      :default => 1
     t.integer  "user_id",                       :null => false
     t.string   "meta_info"
+  end
+
+  create_table "geo_locations", :force => true do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.float    "altitude"
+    t.float    "accuracy"
+    t.float    "altitude_accuracy"
+    t.float    "heading"
+    t.float    "speed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "open_id_authentication_associations", :force => true do |t|
