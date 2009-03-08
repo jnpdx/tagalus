@@ -67,18 +67,22 @@ module TwitterTools
   
   def send_admin_dm(msg)
     
-    tw_user = AppPref.find_by_pref_key('tw_agent_name').pref_val
-    tw_pass = AppPref.find_by_pref_key('tw_agent_pass').pref_val
+    tw_user_pref = AppPref.find_by_pref_key('tw_agent_name').pref_val
+    tw_pass_pref = AppPref.find_by_pref_key('tw_agent_pass').pref_val
     
     url = URI.parse "http://twitter.com/direct_messages/new.json"
     
-    req = Net::HTTP::Post.new(url.path)
-    req.set_form_data({'user' => 'test_dummy','text' => msg})
-    req.basic_auth tw_user, tw_pass
+    if tw_user && tw_pass
+      tw_user = tw_user_pref.pref_val
+      tw_pass = tw_pass_pref.pref_val
+      req = Net::HTTP::Post.new(url.path)
+      req.set_form_data({'user' => 'test_dummy','text' => msg})
+      req.basic_auth tw_user, tw_pass
 
-    res = Net::HTTP.start(url.host, url.port) {|http|
-      http.request(req)
-    }
+      res = Net::HTTP.start(url.host, url.port) {|http|
+        http.request(req)
+      }
+    end
     
   end
   
