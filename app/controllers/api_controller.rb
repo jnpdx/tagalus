@@ -175,7 +175,7 @@ class ApiController < ApplicationController
         return
        end
        
-       to_render = d
+       to_render = d.attributes
      
      when 'comment'
        d = Comment.new
