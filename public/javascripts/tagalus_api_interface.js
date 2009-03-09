@@ -1,34 +1,35 @@
 //Allows interaction with the Tagalus API
 //See documentation at http://blog.tagal.us/api-documentation
 
+//Requires jQuery OR you can redefine ajax_call and encode_params to use the JavaScript library of your choice
+
 var TagalusAPI = {
   
   api_version : '0001',
   api_server : 'http://api.tagal.us/',
   
-  api_call : function(req_type, req_uri, callback, post_params) {
+  api_call : function(req_uri, params, callback) {
     
-    if (post_params != null) {
-      post_data = post_params;
-    } else {
-      post_data = '';
-    }
-    
-    this.ajax_call({
-      type: req_type,
-      url: this.api_server + req_uri,
-      data: post_data,
-      success: callback,
-    })
+    this.ajax_call( this.api_server + req_uri + '?' + this.encode_params(params) + '&api_version=' + this.api_version + '&callback=?',callback);
     
   },
   
-  ajax_call : function(options) {
+  ajax_call : function(url,callback) {
     
     if (window.jQuery != undefined) {
-      jQuery.ajax(options);
+      jQuery.getJSON(url,callback);
     } else {
       log("jQuery is not available.  Either redefine TagalusAPI.ajax_call to use your library of choice, or install jQuery");
+    }
+    
+  },
+  
+  encode_params : function(params) {
+    
+    if (window.jQuery != undefined) {
+      return jQuery.param(params);
+    } else {
+      log("jQuery is not available.  Either redefine TagalusAPI.encode_params to use your library of choice, or install jQuery");
     }
     
   },

@@ -5,10 +5,6 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':data_type/:data_name/:action', :controller => 'api', :format => 'json', :conditions => { :subdomain => 'api' }
   map.connect ':data_type/create.:format', :controller => 'api', :action => 'create', :conditions => { :subdomain => 'api' }
   
-  #javascript interface
-  map.connect 'javascript_api_interface', :controller => 'api', :action => 'javascript_api_interface', :conditions => { :subdomain => 'api' }
-  
-  
   map.connect '*other.:format', :controller => 'api', :action => "api_error", :conditions => { :subdomain => 'api' }
   map.connect '*other', :controller => 'api', :action => "api_error", :format => 'json', :conditions => { :subdomain => 'api' }
 

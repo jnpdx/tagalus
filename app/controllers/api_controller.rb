@@ -64,7 +64,7 @@ class ApiController < ApplicationController
         if data_obj
           d = Definition.find(:first, :conditions => { :tag_id => data_obj.id}, :order => 'authority DESC')
           to_ret = data_obj.attributes
-          data_obj = to_ret.merge ({'definition' => d.attributes})
+          data_obj = to_ret.merge({'definition' => d.attributes})
         end
       when 'definition'
         t = Tag.find_by_the_tag(data_name)
@@ -141,7 +141,7 @@ class ApiController < ApplicationController
        end
        
        to_ret = t.attributes
-       to_render = to_ret.merge ({'definition' => d.attributes})
+       to_render = to_ret.merge({'definition' => d.attributes})
        
        
        
