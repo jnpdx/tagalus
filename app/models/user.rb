@@ -1,6 +1,8 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
   has_many :definitions
+  has_many :comments
+  has_many :api_calls
   include TwitterTools
   
   # Virtual attribute for the unencrypted password

@@ -1,6 +1,7 @@
 class ApiController < ApplicationController
   skip_before_filter :verify_authenticity_token
   before_filter :get_version
+  after_filter :log_api_call
   
   def get_version
     $min_version = '0001'
@@ -18,6 +19,19 @@ class ApiController < ApplicationController
     end
   end
   
+  def log_api_call
+    @api_call = ApiCall.new
+    @api_call.uri = request.request_uri
+    @api_call.success = !@api_error
+    if @api_user
+      @api_call.user_id = @api_user.id
+    end
+    if params[:action] == 'create'
+      @api_call.postdata = params.to_s
+    end
+    @api_call.save
+  end
+  
   def show
     self.send("show_" + @api_version)
   end
@@ -27,6 +41,7 @@ class ApiController < ApplicationController
   end
   
   def api_error m = nil, e = nil
+    @api_error = true
     self.send("api_error_" + @api_version,m,e)
   end
   
@@ -90,7 +105,7 @@ class ApiController < ApplicationController
      end
 
      begin
-       api_user = User.find_by_api_key(@user_api_key)
+       @api_user = User.find_by_api_key(@user_api_key)
      rescue ActiveRecord::RecordNotFound
        api_error "Non-valid API key"
        return
@@ -109,7 +124,7 @@ class ApiController < ApplicationController
        
        d.the_definition = params[:the_definition]
        d.tag_id = t.id
-       d.user_id = api_user.id
+       d.user_id = @api_user.id
        
        if !d.save
          api_error "Couldn't save definition - tag not saved either", d.errors
@@ -140,7 +155,7 @@ class ApiController < ApplicationController
        end
        d.tag_id = t.id
        d.the_definition = params[:the_definition]
-       d.user_id = api_user.id
+       d.user_id = @api_user.id
        d.authority = 1
    
        if !d.save
@@ -164,7 +179,7 @@ class ApiController < ApplicationController
         end
         d.tag_id = t.id
         d.the_comment = params[:the_comment]
-        d.user_id = api_user.id
+        d.user_id = @api_user.id
 
         if !d.save
          api_error "Couldn't save comment", d.errors

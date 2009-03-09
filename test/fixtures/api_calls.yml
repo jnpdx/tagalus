@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  uri: MyString
+  postdata: MyString
+  user_id: 1
+  success: false
+
+two:
+  uri: MyString
+  postdata: MyString
+  user_id: 1
+  success: false
