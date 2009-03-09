@@ -7,10 +7,19 @@ var TagalusAPI = {
   
   api_version : '0001',
   api_server : 'http://api.tagal.us/',
+  api_key : '',
+  
+  api_key_param : function(k) {
+    if (this.api_key == '') {
+      return '';
+    } else {
+      return '&api_key=' + this.api_key;
+    }
+  },
   
   api_call : function(req_uri, params, callback) {
     
-    this.ajax_call( this.api_server + req_uri + '?' + this.encode_params(params) + '&api_version=' + this.api_version + '&callback=?',callback);
+    this.ajax_call( this.api_server + req_uri + '?' + this.encode_params(params) + this.api_key_param() + '&api_version=' + this.api_version + '&callback=?',callback);
     
   },
   

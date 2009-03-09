@@ -155,7 +155,11 @@ class ApiController < ApplicationController
          if params[:tag_id] != nil
            t = Tag.find(params[:tag_id])
          else
-           t = Tag.find_by_the_tag(params[:the_tag])
+           t = Tag.find_or_create_by_the_tag(params[:the_tag])
+           if t == nil
+             api_error "Couldn't create that tag!"
+             return
+           end
          end
        rescue ActiveRecord::RecordNotFound
          api_error "Couldn't find tag"
