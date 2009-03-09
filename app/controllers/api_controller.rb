@@ -19,6 +19,10 @@ class ApiController < ApplicationController
     end
   end
   
+  def javascript_api_interface 
+    send_file 'public/javascripts/tagalus_api_interface.js', :type => 'text/javascript'
+  end
+  
   def log_api_call
     @api_call = ApiCall.new
     @api_call.uri = request.request_uri
@@ -27,7 +31,7 @@ class ApiController < ApplicationController
       @api_call.user_id = @api_user.id
     end
     if params[:action] == 'create'
-      @api_call.postdata = params.to_s
+      @api_call.postdata = params.to_a.join ','
     end
     @api_call.save
   end
@@ -85,12 +89,16 @@ class ApiController < ApplicationController
       data_obj = nil
     end
     
-    
+    to_render = data_obj
     respond_to do |format|
-      format.json { render :json => data_obj.to_json }
-      format.xml { render :xml => data_obj.to_xml }
-      format.text { render :text => data_obj }
-    end
+       if params[:callback]
+         format.json { render :json => ( params[:callback] + '(' + to_render.to_json + ')') }
+       else
+         format.json { render :json => to_render.to_json }
+       end
+       format.xml { render :xml => to_render.to_xml }
+       format.text { render :text => to_render }
+     end
     
   end
   
@@ -194,7 +202,11 @@ class ApiController < ApplicationController
      end
      
      respond_to do |format|
-       format.json { render :json => to_render.to_json }
+       if params[:callback]
+         format.json { render :json => ( params[:callback] + '(' + to_render.to_json + ')') }
+       else
+         format.json { render :json => to_render.to_json }
+       end
        format.xml { render :xml => to_render.to_xml }
        format.text { render :text => to_render }
      end
@@ -224,11 +236,17 @@ class ApiController < ApplicationController
 
     msg = { :error => message, :errors => errors_list }
     
+    to_render = msg
     respond_to do |format|
-      format.json { render :json => msg.to_json }
-      format.xml { render :xml => msg.to_xml }
-      format.text { render :text => msg }
-    end
+       if params[:callback]
+         format.json { render :json => ( params[:callback] + '(' + to_render.to_json + ')') }
+       else
+         format.json { render :json => to_render.to_json }
+       end
+       format.xml { render :xml => to_render.to_xml }
+       format.text { render :text => to_render }
+     end
+     
   end
   
 end
