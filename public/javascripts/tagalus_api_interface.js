@@ -9,11 +9,14 @@
 var TagalusAPI = {
   
   api_version : '0001', //this is set to the latest version by default - to use an older API version, you must redefine this
-  //api_server : 'http://api.tagal.us/', //only should be changed in the event of testing
-  api_server : 'http://api.localtag:3000/',
+  api_server : 'http://api.tagal.us/', //only should be changed in the event of testing
+  //api_server : 'http://api.localtag:3000/',
   api_key : '', //if you set an API key here, it will be tied to every call.  Alternatively, you can specificy api_key in the params of api_call
   
   TAGALUS_LINK : '<a target="_blank" href="http://tagal.us/">Tagalus</a>',
+  
+  css_file : 'http://tagal.us/stylesheets/tagalus_widget.css',
+  css_loaded : false,
   
   remember_api_key : false,
   
@@ -43,7 +46,36 @@ var TagalusAPI = {
   
   /********************/
   
-  
+  load_dependencies : function() {
+    //THIS DOESN'T FUNCTION RIGHT NOW - needs trigger for when done 
+    
+    var headTag = document.getElementsByTagName('head')[0]; 
+    
+    
+    if (jQuery == undefined) {
+      script = document.createElement('script'); 
+      script.id = 'jquery'; 
+      script.type = 'text/javascript'; 
+      script.src = 'http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js'; 
+      headTag.appendChild(script);
+    }
+    
+    widget_css = document.createElement('link');
+    widget_css.href = this.css_file;
+    widget_css.media = "screen, projection"
+    widget_css.rel = "stylesheet"
+    widget_css.type = "text/css"
+    widget_css.id = "widget_css"
+    widget_css.setAttribute("onload","alert('loaded css')")
+    
+    
+    headTag.appendChild(widget_css)
+    
+    css_tag = document.getElementById('widget_css')
+    
+    return true;
+    
+  },
   
   api_key_param : function(k) {
     if (this.api_key == '') {
@@ -55,8 +87,9 @@ var TagalusAPI = {
   
   load_api_key : function() {
     cookie_key = this.readCookie('tagalus_api_key');
-    if (cookie_key != null) {
+    if ((cookie_key != null) && (cookie_key != '')) {
       this.api_key = cookie_key;
+      this.remember_api_key = true;
     }
   },
   
@@ -124,6 +157,10 @@ var TagalusAPI = {
     }
     
     jQuery('.tagalus_widget_close').click(function() { TagalusAPI.hide_widget() });
+    
+    if (this.remember_api_key) {
+      jQuery('#tagalus_remember_api_key').attr('checked',true);
+    }
     
     jQuery('#tagalus_remember_api_key').change(function(e) {
       if (e.target.checked) {
