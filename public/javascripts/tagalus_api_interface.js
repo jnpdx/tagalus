@@ -209,6 +209,10 @@ var TagalusAPI = {
       
       the_tag = $(e.target).parent().get(0).text;
       
+      if (the_tag.indexOf(' ') != -1) {
+        return;
+      }
+      
       if (the_tag.charAt(0) == "#") {
         the_tag = the_tag.substring(1)
       }
@@ -229,6 +233,10 @@ var TagalusAPI = {
       TagalusAPI.reset_dynamic_fields();
       
       the_tag = e.target.text;
+      
+      if (the_tag.indexOf(' ') != -1) {
+        return;
+      }
       
       if (the_tag.charAt(0) == "#") {
         the_tag = the_tag.substring(1)
