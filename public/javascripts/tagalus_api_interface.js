@@ -94,7 +94,9 @@ var TagalusAPI = {
   },
   
   save_api_key : function() {
-    this.createCookie("tagalus_api_key",this.api_key,365)
+    if ((this.api_key != null) && (this.api_key != '')) {
+      this.createCookie("tagalus_api_key",this.api_key,365)
+    }
   },
   
   destroy_saved_api_key : function() {
@@ -148,7 +150,7 @@ var TagalusAPI = {
     widget_code += '</div>'
     widget_code += '<div id="tagalus_widget_footer"><input type="checkbox" id="tagalus_remember_api_key">Remember your API key</a></div>'
     widget_code += '</div>';
-    
+        
     jQuery(document.body).append(widget_code);
     
     if (jQuery('#tagalus_widget').draggable != undefined) {
@@ -281,6 +283,8 @@ var TagalusAPI = {
     add_definition_form_code += '<textarea class="tagalus_widget_dynamic" id="add_tagalus_definition_the_definition"></textarea><br/>'
     add_definition_form_code += '<input type="submit" value="Submit" onclick="window.TagalusAPI.submit_tagalus_form(); return false;" />'
     add_definition_form_code += '</div>';
+    add_definition_form_code += '<a id="enter_api_key_link" href="" onclick="TagalusAPI.enter_api_key_prompt(); return false;">Change API Key</a><br/>';
+    
 
    return add_definition_form_code;
     
@@ -304,8 +308,12 @@ var TagalusAPI = {
   },
   
   enter_api_key_prompt : function() {
-    k = prompt("Enter your Tagalus API Key");
-    if (k != '') {
+    prompt_val = '';
+    if ((this.api_key != null) && (this.api_key != '')) {
+     prompt_val = this.api_key; 
+    }
+    k = prompt("Enter your Tagalus API Key",prompt_val);
+    if ((k != '') && (k != null)) {
       this.api_key = k;
       if (this.remember_api_key) {
         this.save_api_key();
