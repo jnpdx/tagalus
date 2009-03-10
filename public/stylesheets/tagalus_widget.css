@@ -12,6 +12,13 @@ div#tagalus_widget {
    
 }
 
+div#tagalus_widget input[type="text"], div#tagalus_widget textarea {
+  
+  border: 1px solid #999;
+  padding: 4px;
+  
+}
+
 div#tagalus_widget a {
   color: blue;
   text-decoration: none;

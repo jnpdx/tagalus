@@ -254,7 +254,7 @@ var TagalusAPI = {
   
   widget_set_tag : function(tag) {
     
-    jQuery('#tagalus_widget_header_msg').html('Tagalus definition for <a target="_blank" href="http://tagal.us/tag/' + tag + '">#' + tag + '</a>:');
+    jQuery('#tagalus_widget_header_msg').html(this.TAGALUS_LINK + ' definition for <a target="_blank" href="http://tagal.us/tag/' + tag + '">#' + tag + '</a>:');
     jQuery('#add_tagalus_tag_name').val("#" + tag);
     TagalusAPI.widget_display_definition("Loading...");
     TagalusAPI.show_tag(tag, function(data) {
@@ -340,6 +340,22 @@ var TagalusAPI = {
     
     var user_tag = jQuery('#add_tagalus_tag_name').val();
     var user_def = jQuery('#add_tagalus_definition_the_definition').val();
+    
+    if (user_tag.indexOf(' ') != -1) {
+      alert("Tags cannot have spaces in them")
+      return;
+    }
+    
+    if (user_tag.length > 100) {
+      alert("Your tag must be less that 100 characters.  Yours is " + user_tag.length);
+      return;
+    }
+    
+    if (user_def.length > 100) {
+      alert("Your definition must be less that 280 characters.  Yours is " + user_def.length);
+      return;
+    }
+    
     TagalusAPI.hide_widget();
 
     if ((user_tag == '') || (user_def == '')) {
@@ -348,6 +364,8 @@ var TagalusAPI = {
       return;
 
     }
+    
+    
     
     if (user_tag.charAt(0) == "#") {
       user_tag = user_tag.substring(1)
