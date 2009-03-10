@@ -202,7 +202,12 @@ var TagalusAPI = {
   
   add_buttons_to_elements : function(selector) {
     jQuery('img.tagalus_icon').remove();
-    jQuery(selector).append(this.tagalus_icon)
+    jQuery(selector).each(function(i) { 
+      if (this.text.indexOf(' ') != -1) {
+        return;
+      }
+      jQuery(this).append(TagalusAPI.tagalus_icon);
+     });
     jQuery('img.tagalus_icon').bind('click', function(e) {
       
       TagalusAPI.reset_dynamic_fields();
@@ -228,24 +233,30 @@ var TagalusAPI = {
     
     
     jQuery(selector).unbind('click')
-    jQuery(selector).bind('click',function(e) {
-      
-      TagalusAPI.reset_dynamic_fields();
-      
-      the_tag = e.target.text;
-      
-      if (the_tag.indexOf(' ') != -1) {
+    jQuery(selector).each(function(i) { 
+      if (this.text.indexOf(' ') != -1) {
         return;
       }
-      
-      if (the_tag.charAt(0) == "#") {
-        the_tag = the_tag.substring(1)
-      }
-      
-      TagalusAPI.widget_set_tag(the_tag)
-      TagalusAPI.show_widget(e.pageX,e.pageY);
-      return false;
-     })
+      jQuery(this).bind('click',function(e) {
+
+        TagalusAPI.reset_dynamic_fields();
+
+        the_tag = e.target.text;
+
+        if (the_tag.indexOf(' ') != -1) {
+          return;
+        }
+
+        if (the_tag.charAt(0) == "#") {
+          the_tag = the_tag.substring(1)
+        }
+
+        TagalusAPI.widget_set_tag(the_tag)
+        TagalusAPI.show_widget(e.pageX,e.pageY);
+        return false;
+       })
+     });
+    
   },
   
   unbind_cliks : function(selector) {
