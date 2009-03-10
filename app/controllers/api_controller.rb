@@ -112,12 +112,14 @@ class ApiController < ApplicationController
        return
      end
 
-     begin
+     
        @api_user = User.find_by_api_key(@user_api_key)
-     rescue ActiveRecord::RecordNotFound
+     
+     if !@api_user
        api_error "Non-valid API key"
        return
-     end
+      end
+     
 
      case params[:data_type]
      when 'tag'
