@@ -1,0 +1,75 @@
+div#tagalus_widget {
+  
+  width: 240px;
+  border: 1px solid black;
+  font-size: 12px;
+  padding: 6px;
+  position: absolute;
+  background: white;
+  color: black;
+  font-family: Arial, sans-serif;
+  
+}
+
+div#tagalus_widget a {
+  color: blue;
+  text-decoration: none;
+}
+
+div#tagalus_widget_header, div#add_tagalus_definition span {
+  
+  background: #3399FF;
+  font-weight: bold;
+  padding-left: 4px;
+  display: block;
+  
+}
+
+span#tagalus_widget_definition {
+
+  display: block;
+  width: 80%;
+  line-height: 1.2em;
+  margin: 10px auto 10px auto;
+  color: #666;
+
+}
+
+span#tagalus_widget_header_msg {
+  
+  display: block;
+  
+}
+
+div#tagalus_widget_header a {
+  text-decoration: none;
+  color: black;
+}
+
+div.tagalus_widget_close {
+  float: right;
+  cursor: pointer;
+  margin-right: 4px;
+}
+
+input#add_tagalus_tag_name {
+  width: 90%;
+}
+
+textarea#add_tagalus_definition_the_definition {
+  width: 90%;
+  height: 100px;
+}
+
+div#add_tagalus_definition {
+
+}
+
+img.tagalus_icon {
+  
+  width: 12px;
+  height: 12px;
+  margin: 0px 4px;
+  vertical-align: middle;
+  
+}
