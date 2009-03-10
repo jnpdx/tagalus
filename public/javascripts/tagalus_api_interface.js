@@ -11,6 +11,34 @@ var TagalusAPI = {
   api_server : 'http://api.tagal.us/', //only should be changed in the event of testing
   api_key : '', //if you set an API key here, it will be tied to every call.  Alternatively, you can specificy api_key in the params of api_call
   
+  /********************/
+  
+  //Example: TagalusAPI.show_tag('sxsw',function(data) { alert(data.definition.the_definition })
+  show_tag : function(the_tag,callback) {
+    this.api_call('tag/' + the_tag + '/show.json',{}, function(data) {
+      callback.call(this,data)
+    });
+  },
+  
+  //Example TagalusAPI.api_key = 'MYAPIKEY'; TagalusAPI.create_definition('sxsw','my definition for sxsw',function(data) { if (data.error == undefined) { alert("success!"); } })
+  create_definition : function(tag,definition,callback) {
+    if (this.api_key == '') {
+      return 'NO_API_KEY';
+    }
+    this.api_call('definition/create.json',
+    {
+      the_tag: tag,
+      the_definition: definition
+    },
+    function(data) {
+      callback.call(this,data)
+    })
+  },
+  
+  /********************/
+  
+  
+  
   api_key_param : function(k) {
     if (this.api_key == '') {
       return '';
