@@ -1,6 +1,7 @@
 class ApiController < ApplicationController
   skip_before_filter :verify_authenticity_token
   before_filter :get_version
+  after_filter :log_api_call
   
   def get_version
     $min_version = '0001'
@@ -18,6 +19,23 @@ class ApiController < ApplicationController
     end
   end
   
+  def javascript_api_interface 
+    send_file 'public/javascripts/tagalus_api_interface.js', :type => 'text/javascript'
+  end
+  
+  def log_api_call
+    @api_call = ApiCall.new
+    @api_call.uri = request.request_uri
+    @api_call.success = !@api_error
+    if @api_user
+      @api_call.user_id = @api_user.id
+    end
+    if params[:action] == 'create'
+      @api_call.postdata = params.to_a.join ','
+    end
+    @api_call.save
+  end
+  
   def show
     self.send("show_" + @api_version)
   end
@@ -27,6 +45,7 @@ class ApiController < ApplicationController
   end
   
   def api_error m = nil, e = nil
+    @api_error = true
     self.send("api_error_" + @api_version,m,e)
   end
   
@@ -45,7 +64,7 @@ class ApiController < ApplicationController
         if data_obj
           d = Definition.find(:first, :conditions => { :tag_id => data_obj.id}, :order => 'authority DESC')
           to_ret = data_obj.attributes
-          data_obj = to_ret.merge ({'definition' => d.attributes})
+          data_obj = to_ret.merge({'definition' => d.attributes})
         end
       when 'definition'
         t = Tag.find_by_the_tag(data_name)
@@ -70,12 +89,16 @@ class ApiController < ApplicationController
       data_obj = nil
     end
     
-    
+    to_render = data_obj
     respond_to do |format|
-      format.json { render :json => data_obj.to_json }
-      format.xml { render :xml => data_obj.to_xml }
-      format.text { render :text => data_obj }
-    end
+       if params[:callback]
+         format.json { render :json => ( params[:callback] + '(' + to_render.to_json + ')') }
+       else
+         format.json { render :json => to_render.to_json }
+       end
+       format.xml { render :xml => to_render.to_xml }
+       format.text { render :text => to_render }
+     end
     
   end
   
@@ -89,12 +112,14 @@ class ApiController < ApplicationController
        return
      end
 
-     begin
-       api_user = User.find_by_api_key(@user_api_key)
-     rescue ActiveRecord::RecordNotFound
+     
+       @api_user = User.find_by_api_key(@user_api_key)
+     
+     if !@api_user
        api_error "Non-valid API key"
        return
-     end
+      end
+     
 
      case params[:data_type]
      when 'tag'
@@ -109,7 +134,7 @@ class ApiController < ApplicationController
        
        d.the_definition = params[:the_definition]
        d.tag_id = t.id
-       d.user_id = api_user.id
+       d.user_id = @api_user.id
        
        if !d.save
          api_error "Couldn't save definition - tag not saved either", d.errors
@@ -118,7 +143,7 @@ class ApiController < ApplicationController
        end
        
        to_ret = t.attributes
-       to_render = to_ret.merge ({'definition' => d.attributes})
+       to_render = to_ret.merge({'definition' => d.attributes})
        
        
        
@@ -132,7 +157,11 @@ class ApiController < ApplicationController
          if params[:tag_id] != nil
            t = Tag.find(params[:tag_id])
          else
-           t = Tag.find_by_the_tag(params[:the_tag])
+           t = Tag.find_or_create_by_the_tag(params[:the_tag])
+           if t == nil
+             api_error "Couldn't create that tag!"
+             return
+           end
          end
        rescue ActiveRecord::RecordNotFound
          api_error "Couldn't find tag"
@@ -140,7 +169,7 @@ class ApiController < ApplicationController
        end
        d.tag_id = t.id
        d.the_definition = params[:the_definition]
-       d.user_id = api_user.id
+       d.user_id = @api_user.id
        d.authority = 1
    
        if !d.save
@@ -148,7 +177,7 @@ class ApiController < ApplicationController
         return
        end
        
-       to_render = d
+       to_render = d.attributes
      
      when 'comment'
        d = Comment.new
@@ -164,7 +193,7 @@ class ApiController < ApplicationController
         end
         d.tag_id = t.id
         d.the_comment = params[:the_comment]
-        d.user_id = api_user.id
+        d.user_id = @api_user.id
 
         if !d.save
          api_error "Couldn't save comment", d.errors
@@ -179,7 +208,11 @@ class ApiController < ApplicationController
      end
      
      respond_to do |format|
-       format.json { render :json => to_render.to_json }
+       if params[:callback]
+         format.json { render :json => ( params[:callback] + '(' + to_render.to_json + ')') }
+       else
+         format.json { render :json => to_render.to_json }
+       end
        format.xml { render :xml => to_render.to_xml }
        format.text { render :text => to_render }
      end
@@ -209,11 +242,17 @@ class ApiController < ApplicationController
 
     msg = { :error => message, :errors => errors_list }
     
+    to_render = msg
     respond_to do |format|
-      format.json { render :json => msg.to_json }
-      format.xml { render :xml => msg.to_xml }
-      format.text { render :text => msg }
-    end
+       if params[:callback]
+         format.json { render :json => ( params[:callback] + '(' + to_render.to_json + ')') }
+       else
+         format.json { render :json => to_render.to_json }
+       end
+       format.xml { render :xml => to_render.to_xml }
+       format.text { render :text => to_render }
+     end
+     
   end
   
 end
