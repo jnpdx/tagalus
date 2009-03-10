@@ -1,5 +1,6 @@
 //Allows interaction with the Tagalus API
 //See documentation at http://blog.tagal.us/api-documentation
+//Questions/comments: tagalus+api@gmail.com
 
 //Requires jQuery OR you can redefine ajax_call and encode_params to use the JavaScript library of your choice
 
