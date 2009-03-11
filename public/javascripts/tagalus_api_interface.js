@@ -212,7 +212,7 @@ var TagalusAPI = {
       
       TagalusAPI.reset_dynamic_fields();
       
-      the_tag = $(e.target).parent().get(0).text;
+      the_tag = jQuery(e.target).parent().get(0).text;
       
       if (the_tag.indexOf(' ') != -1) {
         return;
