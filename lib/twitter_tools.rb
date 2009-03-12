@@ -72,7 +72,7 @@ module TwitterTools
     
     url = URI.parse "http://twitter.com/direct_messages/new.json"
     
-    if tw_user && tw_pass
+    if tw_user_pref && tw_pass_pref
       tw_user = tw_user_pref.pref_val
       tw_pass = tw_pass_pref.pref_val
       req = Net::HTTP::Post.new(url.path)
