@@ -362,7 +362,7 @@ var TagalusAPI = {
       return;
     }
     
-    if (user_def.length > 100) {
+    if (user_def.length > 280) {
       alert("Your definition must be less that 280 characters.  Yours is " + user_def.length);
       return;
     }
