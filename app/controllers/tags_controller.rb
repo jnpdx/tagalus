@@ -159,9 +159,13 @@ class TagsController < ApplicationController
       return
     end
     
-    #if param[:tag][:the_tag][0] == '#'
+    t_tag = param[:tag][:the_tag]
     
-    @tag = Tag.find_or_initialize_by_the_tag(params[:tag][:the_tag])
+    if t_tag[0] == '#'
+      t_tag = t_tag[1.t_tag.length]
+    end
+    
+    @tag = Tag.find_or_initialize_by_the_tag(t_tag)
     @tag.updated_at = DateTime.now
     
     @d = Definition.new(params[:definition])
