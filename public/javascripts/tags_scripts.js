@@ -129,6 +129,77 @@ function toggle_widget(ob) {
 }
 
 function get_widget(widget_title) {
+  
+	
+	if ($('#' + widget_title).length > 0) {
+		
+		$('#' + widget_title).find('.widget_content').html('');
+		//alert("getting widget" + widget_title);
+		//put a spinner in
+		$('#' + widget_title).find('.loader').html('<img class="ajax_loader" src="/images/loader.gif" alt="loading..."/>');
+		
+	}
+	
+	if (widget_title == "widget_twittertweets") {
+	  
+	  $.getJSON("http://search.twitter.com/search.json?q=" + escape(window['the_tag']) + "&callback=?",
+	  
+	    function(data) {
+	    
+	      rendered_data = render_tweets(data);
+				
+				if (rendered_data == '') {
+					
+					rendered_data = "There are no tweets to show!"
+					
+				} else {
+				  
+				  rendered_data += '<a class="viewmore" href="http://search.twitter.com/?q=' + escape(window['the_tag']) + '">View more tweets</a>'
+				  
+				}
+				
+				$('#' + widget_title).find('.widget_content').html(rendered_data);
+				
+				$('#' + widget_title).find('.loader').hide();
+	    
+	    }
+	  
+	  )
+	  
+	} else if (widget_title == "widget_flickrthumbnails") {
+	  
+	  $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags=" + escape(window['the_tag']) + "&tagmode=any&format=json&jsoncallback=?",
+	  
+	    function(data) {
+	    
+	      rendered_data = render_flickr_thumbnails(data);
+				
+				if (rendered_data == '') {
+					
+					rendered_data = "There are no photos to show!"
+					
+				} else {
+				  
+				  rendered_data += '<a class="viewmore" href="http://flickr.com/search/?q=' + window['the_tag'] + '">View more photos</a>'
+				  
+				}
+				
+				$('#' + widget_title).find('.widget_content').html(rendered_data);
+				
+				$('#' + widget_title).find('.loader').hide();
+	    
+	    }
+	  );
+	  
+	} else if (widget_title == "widget_youtubevideos") {
+	  
+	    get_widget_old(widget_title)
+	  
+	}
+  
+}
+
+function get_widget_old(widget_title) {
 	
 	var widget_url = widget_title;
 	
@@ -280,17 +351,17 @@ function render_flickr_thumbnails(data) {
 	
 	var to_ret = "";
 	
-	if (data.photos.photo.length >= 1) {
+	if (data.items.length >= 1) {
 		
-		for (i in data.photos.photo) {
+		for (i in data.items) {
 			
 			if (i == 20) {	
 				break;	
 			}
 			
-			var cur_photo = data.photos.photo[i];
-			to_ret += '<a href="http://www.flickr.com/photos/' + cur_photo.owner + '/' + cur_photo.id + '"' + '>';
-			to_ret += '<img alt="Flickr image" class="flickr_thumb" src="http://farm' + cur_photo.farm + '.static.flickr.com/' + cur_photo.server +'/' + cur_photo.id + '_' + cur_photo.secret + '_s.jpg' + '"/></a>';
+			var cur_photo = data.items[i];
+			to_ret += '<a href="' + cur_photo.link + '">';
+			to_ret += '<img alt="Flickr image" class="flickr_thumb" src="' + cur_photo.media.m + '"/></a>';
 			
 		}
 		
