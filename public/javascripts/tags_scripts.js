@@ -162,6 +162,10 @@ function get_widget(widget_title) {
 						
 						rendered_data = "There are no tweets to show!"
 						
+					} else {
+					  
+					  rendered_data += '<a class="viewmore" href="http://search.twitter.com/?q=' + window['the_tag'] + '">View more tweets</a>'
+					  
 					}
 					
 					
@@ -176,6 +180,10 @@ function get_widget(widget_title) {
 						
 						rendered_data = "There are no photos to show!"
 						
+					} else {
+					  
+					  rendered_data += '<a class="viewmore" href="http://flickr.com/search/?q=' + window['the_tag'] + '">View more photos</a>'
+					  
 					}
 					
 				}
@@ -204,9 +212,13 @@ function get_widget(widget_title) {
 						
 						rendered_data = "There are no videos to show!"
 						
+					} else {
+					  
 					}
 					
 					rendered_data += '<br class="clear_both"/>';
+					
+					rendered_data += '<a class="viewmore" href="http://www.youtube.com/results?search_query=' + window['the_tag'] + '">View more videos</a>'
 					
 					//youtube_data = data;
 					
@@ -256,6 +268,7 @@ function render_tweets(data) {
 		}
 		
 		to_ret += "</ul>";
+		
 		
 	}
 	

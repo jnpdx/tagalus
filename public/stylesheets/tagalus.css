@@ -123,6 +123,12 @@ div.widget_content {
 	
 }
 
+a.viewmore {
+  display: block;
+  text-align: left;
+  text-decoration: none;
+}
+
 a.collapse_link {
 	
 	float: left;
