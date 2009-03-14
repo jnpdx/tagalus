@@ -73,8 +73,8 @@ module TwitterTools
     url = URI.parse "http://twitter.com/direct_messages/new.json"
     
     if tw_user_pref && tw_pass_pref
-      tw_user = tw_user_pref.pref_val
-      tw_pass = tw_pass_pref.pref_val
+      tw_user = tw_user_pref
+      tw_pass = tw_pass_pref
       req = Net::HTTP::Post.new(url.path)
       req.set_form_data({'user' => 'test_dummy','text' => msg})
       req.basic_auth tw_user, tw_pass

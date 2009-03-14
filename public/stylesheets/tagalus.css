@@ -504,7 +504,7 @@ div#alternate_defs h4 {
 	
 }
 
-div.definition {
+div.definition, div.tag_comment {
 	
 	border: 2px solid #aaa;
 	margin: 0px auto 10px auto;
@@ -518,6 +518,7 @@ span.def {
 	text-align: justify;
 	display: block;
 	clear: both;
+	margin: 10px 0px 10px 0px;
 	
 }
 
@@ -909,14 +910,7 @@ div#search_box input#search_button {
 
 /* Comments */
 
-div.tag_comment {
-	
-	border: 1px solid #aaa;
-	padding: 6px;
-	margin: 6px 0 6px 0;
-	overflow: auto;
-	
-}
+
 
 div#new_tag_comment_section {
 	
