@@ -114,6 +114,10 @@
 			
 				var q = $.trim($input.val());
 
+        if (q.charAt(0) == "#") {
+          q = q.substring(1)
+        }
+
 				if (q.length >= options.minchars) {
 					
 					cached = checkCache(q);
