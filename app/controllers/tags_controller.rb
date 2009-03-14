@@ -90,7 +90,11 @@ class TagsController < ApplicationController
     end
     
     if @definitions != nil
-      @main_def = @definitions[0].texturized_definition
+      if @definitions[0] != nil
+        @main_def = @definitions[0].texturized_definition
+      else
+        @main_def = "This tag hasn't been defined yet - be the first one to define it by using the form below!"
+      end
     else 
       @main_def = "This tag hasn't been defined yet - be the first one to define it by using the form below!"
     end
@@ -155,6 +159,11 @@ class TagsController < ApplicationController
     end
     if Definition.find_by_the_definition(params[:definition][:the_definition]) != nil
       flash[:error] = "Sorry, but something already has that definition"
+      redirect_to :action => "index"
+      return
+    end
+    if params[:definition][:the_definition].length > 280
+      flash[:error] = "Sorry, but that definition is too long, at " + params[:definition][:the_definition].length.to_s + " characters - please limit it to a max of 280 characters"
       redirect_to :action => "index"
       return
     end
