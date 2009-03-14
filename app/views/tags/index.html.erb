@@ -24,7 +24,7 @@ Welcome to Tagalus!  <a href='/about'>Learn what it is</a>.  Also, you can <a hr
 				<% @definition = Definition.find(:first, :conditions => { :tag_id => tag.id }) %>
 
 				<div class="tag">
-					<span class="the_tag"><%= link_to (h tag.the_tag), ("/tag/" + tag.the_tag) %></span>
+					<span class="the_tag"><%= link_to (h tag.the_tag), ("/tag/" + tag.the_tag), :rel => 'tag' %></span>
 					<span class="definition">
 					<% 
 						d = ""

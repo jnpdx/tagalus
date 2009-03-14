@@ -18,9 +18,9 @@ class Comment < ActiveRecord::Base
     
     regex = Regexp.new '(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?)'
     
-    old.gsub!(regex,'<a href="\&" target="_blank">\&</a>')
+    old.gsub!(regex,'<a href="\&" rel="nofollow" target="_blank">\&</a>')
     
-    old.gsub!(/[#]+([A-Za-z0-9-_]+)/,'<a href="/tag/\\1">#\\1</a>')
+    old.gsub!(/[#]+([A-Za-z0-9-_]+)/,'<a rel="tag" href="/tag/\\1">#\\1</a>')
     
     return old
   end
