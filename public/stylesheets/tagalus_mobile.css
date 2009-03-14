@@ -641,6 +641,11 @@ div.preview_widget h3 {
 	
 }
 
+a.viewmore {
+  display: block;
+  text-align: left;
+  text-decoration: none;
+}
 
 
 /* Flickr */
