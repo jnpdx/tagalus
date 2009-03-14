@@ -64,7 +64,8 @@ div.yellow_box {
 div#canvas {
 	
 	font-size: 1.4em;
-	width: 320px;
+	width: 300px;
+	margin-left: 20px;
 	
 
 }
@@ -192,7 +193,6 @@ div#header span#header_description {
 
 div#header_left {
 	
-	float: left;
 	margin-left: 10px;
 	
 	
@@ -225,8 +225,7 @@ div#welcome_mat {
 	
 	border: 2px solid #bccde3;
 	padding: 10px;
-	width: 90%;
-	margin: 6px auto 20px auto;
+	margin: 6px 0 20px 0;
 	background: white;
 	text-align: justify;
 	font-size: .7em;
@@ -337,14 +336,13 @@ div#new_tag_div input#tag_submit {
 	vertical-align: middle;
 	width: 90%;
 	padding: 4px;
+	margin-top: 4px;
 	
 }
 
 div#main_tags_list {
 	
-	width: 90%;
-	margin-right: auto;
-	margin-left: auto;
+
 	
 }
 
@@ -819,19 +817,21 @@ div#search_box h4 {
 
 div#search_box input#suggest {
 	width: 150px;
-	border: 1px solid #aaa;
-	margin-top: 4px;
+	border: 2px solid #aaa;
+	padding: 5px;
+	height: 24px;
+	font-size: 18px;
 }
 
 div#search_box input#search_button {
 	
-	margin-top: -4px;
-	margin-left: 170px;
-	width: 80px;
-	border: 1px solid #aaa;
-	background: #bccde3;
+	margin-left: 190px;
+	border: 2px solid #aaa;
+	height: 38px;
+	font-size: 18px;
 	
 }
+
 
 /* Search suggest */
 .ac_results {
