@@ -193,7 +193,111 @@ function get_widget(widget_title) {
 	  
 	} else if (widget_title == "widget_youtubevideos") {
 	  
-	    get_widget_old(widget_title)
+	  gdataURL = "http://gdata.youtube.com/feeds/api/videos/-/" + escape(window['the_tag']) + "?alt=json-in-script&format=5&jsoncallback=?";
+	  
+	  // insert the script:
+    var s = document.createElement('script');
+    s.src = gdataURL;
+    document.getElementsByTagName('head')[0].appendChild(s);
+    
+	  
+	  gdata = { io: { handleScriptLoaded: 
+	    
+	    function(data) {
+
+        //data = eval('(' + data + ')')
+
+	      rendered_data = ''
+
+        
+        var feed = data.feed;
+        var entries = feed.entry || [];
+        var html = ['<ul class="videos">'];
+        for (var i = 0; i < entries.length; i++) {
+          if (i == 4) {
+            break;
+          }
+          
+          var entry = entries[i];
+					vid_url = entries[i].media$group.media$content[0].url;
+					
+					rendered_data += '<div class="youtube_video">';
+					rendered_data += '<object type="application/x-shockwave-flash" data="' + vid_url + ';f=gdata_videos" height="150" width="206"><param name="movie" value="' + vid_url + '"></object>' 
+					rendered_data += '</div>'
+					
+				}
+				
+				if (rendered_data == '') {
+					
+					rendered_data = "There are no videos to show!"
+					
+				} else {
+				  
+				  rendered_data += '<br class="clear_both"/>';
+
+					rendered_data += '<a class="viewmore" href="http://www.youtube.com/results?search_query=' + window['the_tag'] + '">View more videos</a>'
+				  
+				}
+
+
+				$('#' + widget_title).find('.widget_content').html(rendered_data);
+
+				$('#' + widget_title).find('.loader').hide();
+
+	    }
+    
+    
+     } };
+    
+	  
+	  /* This would work if Google would use correct JSON callback stuff
+	    $.getJSON("http://gdata.youtube.com/feeds/api/videos/-/" + escape(window['the_tag']) + "?alt=json-in-script&format=5&jsoncallback=?",
+
+  	    function(data) {
+
+  	      rendered_data = ''
+
+          
+          var feed = data.feed;
+          var entries = feed.entry || [];
+          var html = ['<ul class="videos">'];
+          for (var i = 0; i < entries.length; i++) {
+            if (i == 4) {
+              break;
+            }
+            
+            var entry = entries[i];
+						vid_url = entries[i].media$group.media$content[0].url;
+						
+						rendered_data += '<div class="youtube_video">';
+						rendered_data += '<object type="application/x-shockwave-flash" data="' + vid_url + ';f=gdata_videos" height="150" width="206"><param name="movie" value="' + vid_url + '"></object>' 
+						rendered_data += '</div>'
+						
+					}
+					
+					if (rendered_data == '') {
+						
+						rendered_data = "There are no videos to show!"
+						
+					} else {
+					  
+					  rendered_data += '<br class="clear_both"/>';
+
+  					rendered_data += '<a class="viewmore" href="http://www.youtube.com/results?search_query=' + window['the_tag'] + '">View more videos</a>'
+					  
+					}
+
+
+  				$('#' + widget_title).find('.widget_content').html(rendered_data);
+
+  				$('#' + widget_title).find('.loader').hide();
+
+  	    }
+  	  );
+	  */
+	  
+	    //get_widget_old(widget_title)
+	    //return;
 	  
 	}
   
@@ -285,11 +389,13 @@ function get_widget_old(widget_title) {
 						
 					} else {
 					  
+					  rendered_data += '<br class="clear_both"/>';
+
+  					rendered_data += '<a class="viewmore" href="http://www.youtube.com/results?search_query=' + window['the_tag'] + '">View more videos</a>'
+					  
 					}
 					
-					rendered_data += '<br class="clear_both"/>';
 					
-					rendered_data += '<a class="viewmore" href="http://www.youtube.com/results?search_query=' + window['the_tag'] + '">View more videos</a>'
 					
 					//youtube_data = data;
 					
@@ -379,8 +485,8 @@ function refresh_tweets() {
 	
 	var since_tweet = $('#widget_twittertweets').find('.twitter_tweet:first').find('.tweet_id').val();
 	
-	$.get(URL_BASE + "/widget/twittertweets/" + the_tag,
-		{ since_id: MOST_RECENT_TWEET } , function (data) {
+	$.getJSON("http://search.twitter.com/search.json?q=" + escape(window['the_tag']) + "&since_id=" + MOST_RECENT_TWEET + "&callback=?",
+		function (data) {
 			//alert(widget_title);
 
 			if (data.results.length == 0) {
@@ -407,7 +513,7 @@ function refresh_tweets() {
 			
 			$('#tweet_refresh_box').show('slow');
 			
-	},'json');
+	});
 	
 }
 
