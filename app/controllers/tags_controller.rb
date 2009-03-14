@@ -159,10 +159,10 @@ class TagsController < ApplicationController
       return
     end
     
-    t_tag = param[:tag][:the_tag]
+    t_tag = params[:tag][:the_tag]
     
-    if t_tag[0] == '#'
-      t_tag = t_tag[1.t_tag.length]
+    if t_tag[0] == 35
+      t_tag = t_tag[1..t_tag.length]
     end
     
     @tag = Tag.find_or_initialize_by_the_tag(t_tag)

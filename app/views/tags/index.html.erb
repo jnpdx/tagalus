@@ -4,42 +4,70 @@ Welcome to Tagalus!  <a href='/about'>Learn what it is</a>.  Also, you can <a hr
 <br class="clear_both"/>
 </div>
 
-<%= render :partial => 'layouts/partials/add_tag_form' %>
-<br class="clear_both"/>
+<div id="front_boxes">
 
-<div id="main_tags_list">
-	<% for tag in @tags %>
-		<% @definition = Definition.find(:first, :conditions => { :tag_id => tag.id }) %>
-
-		<div class="tag">
-			<span class="the_tag"><%= link_to (h tag.the_tag), ("/tag/" + tag.the_tag) %></span>
-			<span class="definition">
-			<% 
-				d = ""
-				if @definition != nil
-					d = @definition.the_definition
-				end
-			%>
-			<%=h d %>
-			</span>
+	<div id="left_front_box">
+		
+		<h2>Find a tag:</h2>
+		
+		<div id="search_box" class="yellow_box">
+		<% form_tag '/search' do %>
+		<!-- ><form id="search_form" name="search_form" method="post" action=""> -->
+		<input size="22" style="position: absolute;" id="suggest" name="suggest" value="#"/>
+		<input type="submit" value="Search" id="search_button"/>
+		<!--></form> -->
+		<% end %>
 		</div>
 		
-	<% end %>
+		<div id="main_tags_list">
+			<% for tag in @tags %>
+				<% @definition = Definition.find(:first, :conditions => { :tag_id => tag.id }) %>
 
-	<div class="pagination">
-		<% if @prev_pages %>
-			<a href="?p=<%=@page - 1%>">Prev page</a>
-			<% if @next_pages %>
-			&nbsp;/&nbsp;
+				<div class="tag">
+					<span class="the_tag"><%= link_to (h tag.the_tag), ("/tag/" + tag.the_tag) %></span>
+					<span class="definition">
+					<% 
+						d = ""
+						if @definition != nil
+							d = @definition.the_definition
+						end
+					%>
+					<%=h d %>
+					</span>
+				</div>
+
 			<% end %>
-		<% end %>
-		<% if @next_pages %>
-			<a href="?p=<%=@page + 1%>">Next page</a>
-		<% end %>
-	</div>
 
+			<div class="pagination">
+				<% if @prev_pages %>
+					<a href="?p=<%=@page - 1%>">Prev page</a>
+					<% if @next_pages %>
+					&nbsp;/&nbsp;
+					<% end %>
+				<% end %>
+				<% if @next_pages %>
+					<a href="?p=<%=@page + 1%>">Next page</a>
+				<% end %>
+			</div>
+
+		</div>
+		
+	</div>
+	
+	
+	<div id="right_front_box">
+				
+		<%= render :partial => 'layouts/partials/add_tag_form' %>
+		
+		
+	</div>
+	
 </div>
 
+<br class="clear_both"/>
+
+
+<!-- 
 <div id="frontpage_info">
 <span id="line1">Use <a id="tagalus">@tagalus</a> to</span>
 <span id="line2">get definitions for </span>
@@ -47,5 +75,6 @@ Welcome to Tagalus!  <a href='/about'>Learn what it is</a>.  Also, you can <a hr
 <span id="line3">define</span>
 <span id="line4">#tags</span>
 </div>
+-->
 
 <br />

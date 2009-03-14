@@ -26,10 +26,14 @@
 -->
 
 <div id="new_tag_div">
+	
+	<h2>Define a tag:</h2>
+	
+	
 	<% form_for :tag, :url => {:controller => 'tags', :action => "create" } do |form| %>
 		<% fields_for :tag  do |t| %>
-	  
-@tagalus define #<%= t.text_field:the_tag %> <% end %> as
+	  <% @tag = Tag.new; @definition = Definition.new %>
+@tagalus define #<%= t.text_field:the_tag %> <% end %> <br/> as <br/>
  
 <% fields_for :definition  do |d| %><%= d.text_area :the_definition %><% end %>
 

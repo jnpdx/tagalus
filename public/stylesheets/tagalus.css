@@ -162,15 +162,16 @@ div#addthis_button {
 div#header_top {
 	
 	height: 30px;
-	padding: 4px 20px 4px 20px;
+	margin: 4px 70px;
+	padding: 0px 10px;
 	
 }
 
 div#header {
 	margin-bottom: 6px;
 	width: 100%;
-	height: 120px;
-	padding: 0px 0px 0px 20px;
+	height: 108px;
+	padding: 0px 0px 0px 0px;
 	background: #3399FF;
 }
 
@@ -183,7 +184,7 @@ div#header a {
 div#header a#logo_head {
 	
 	color: black;
-	font-size: 72px;
+	font-size: 60px;
 	font-weight: normal;
 	display: block;
 	margin-bottom: 4px;
@@ -201,7 +202,7 @@ div#header span#header_description {
 div#header_left {
 	
 	float: left;
-	margin-left: 50px;
+	margin-left: 70px;
 	
 	
 }
@@ -233,7 +234,7 @@ div#welcome_mat {
 	
 	border: 2px solid #bccde3;
 	padding: 10px;
-	margin: 56px 80px 20px 80px;
+	margin: 24px 80px 20px 80px;
 	background: white;
 	text-align: justify;
 	
@@ -310,18 +311,14 @@ span.cur_page a {
 div#new_tag_div {
 	
 	padding: 10px;
-	margin: 20px 80px 10px;
-	font-size: 2em;
-	text-align: center;
-	width: 950px;
 	
 }
 
 
 div#new_tag_div textarea#definition_the_definition {
 	
-	width: 240px;
-	height: 40px;
+	width: 380px;
+	height: 80px;
 	padding: 10px 5px 5px 5px;
 	font-size: 18px;
 	vertical-align: middle;
@@ -330,10 +327,11 @@ div#new_tag_div textarea#definition_the_definition {
 
 div#new_tag_div input#tag_the_tag {
 	
+	margin-top: 4px;
 	font-size: 18px;
 	vertical-align: middle;
-	width: 170px;
-	padding: 16px;
+	width: 380px;
+	padding: 5px;
 	
 }
 
@@ -342,7 +340,9 @@ div#new_tag_div input#tag_submit {
 	font-size: 18px;
 	height: 50px;
 	vertical-align: middle;
-	width: 104px;
+	width: 394px;
+	display: block;
+	margin: 4px 0px;
 	
 }
 
@@ -351,7 +351,7 @@ div#main_tags_list {
 	float: left;
 	width: 450px;
 	margin-right: 20px;
-	margin-left: 80px;
+	margin-top: 40px;
 	
 }
 
@@ -850,11 +850,31 @@ br.clear_both {
 
 /* Search box */
 
+div#front_boxes {
+  
+  margin-left: 80px;
+  margin-right: 80px;
+  
+}
+
+div#left_front_box,div#right_front_box {
+  float: left;
+  width: 50%;
+}
+
+div#right_front_box {
+  background: #ddd;
+}
+
+div#front_boxes h2 {
+  
+  padding-bottom: 10px;
+  
+}
+
 div#search_box {
-	width: 280px;
-	height: 50px;
-	float: right;
-	margin: 10px 0 0 0;
+	width: 50%;
+	float: left;
 }
 
 div#search_box h4 {
@@ -865,16 +885,20 @@ div#search_box h4 {
 }
 
 div#search_box input#suggest {
-	width: 150px;
-	border: 1px solid #aaa;
+	width: 250px;
+	border: 2px solid #aaa;
+	padding: 5px;
+	height: 24px;
+	font-size: 18px;
 }
 
 div#search_box input#search_button {
 	
-	margin-left: 170px;
-	width: 80px;
-	border: 1px solid #aaa;
-	background: #bccde3;
+	margin-left: 290px;
+	width: 124px;
+	border: 2px solid #aaa;
+	height: 38px;
+	font-size: 18px;
 	
 }
 
