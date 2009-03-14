@@ -8,7 +8,14 @@ class DefinitionsController < ApplicationController
       return
     end
     
-    @tag = Tag.find_or_create_by_the_tag(params[:the_tag])
+    @tag = Tag.find_or_initialize_by_the_tag(params[:the_tag])
+    
+    new_tag = false
+        
+    if @tag.id == nil
+      new_tag = true
+      @tag.save
+    end
     
     @tag.updated_at = DateTime.now
         
@@ -17,13 +24,16 @@ class DefinitionsController < ApplicationController
     @definition.tag_id = @tag.id
     if (@definition.save)
       #render :text => "saved definition"
-      @tag.save
       send_admin_dm "New definition: http://tagal.us/tag/" + @tag.the_tag
       
       flash[:notice] = "Your definition was added to #" + @tag.the_tag
       redirect_to '/tag/' + @tag.the_tag
     else 
       flash[:error] = "You need to enter a definition"
+      
+      if new_tag
+        @tag.destroy
+      end
       
       @definition.errors.each{|attr,msg| flash[:error] = msg}
       redirect_to '/tag/' + @tag.the_tag

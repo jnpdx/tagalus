@@ -78,11 +78,13 @@ class TwitterCronController < ApplicationController
       to_ret += "going to define it as: " + the_def + "<br/>"
       
       
-      @tag = Tag.find_or_create_by_the_tag(the_tag)
+      @tag = Tag.find_or_initialize_by_the_tag(the_tag)
       
+      new_tag = false
+
       if @tag.id == nil
-        to_ret += "Couldn't get tag!<br/><br/>"
-        next
+        new_tag = true
+        @tag.save
       end
       
       
@@ -96,6 +98,9 @@ class TwitterCronController < ApplicationController
         to_ret += tweet_back(cur_user,tweet_id,"http://tagal.us/tag/#{the_tag} " + '#' + the_tag)
       else
         #to_ret += tweet_back(cur_user,tweet_id,"There was a problem - we probably already have that definition")
+        if new_tag
+          @tag.destroy
+        end
       end
       
       to_ret += "<br/><br/>"
