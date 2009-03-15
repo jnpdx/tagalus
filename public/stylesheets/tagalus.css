@@ -1131,5 +1131,9 @@ div#admin_screen div {
 
 
 
-
+/* TRENDING */
+div#trending_terms {
+  width: 600px;
+  float: left;
+}
 

@@ -22,6 +22,18 @@ module TwitterTools
   
   end
   
+  def get_trending_terms
+    
+    url = "http://search.twitter.com/trends.json";	
+  
+    user_data = Net::HTTP.get_response(URI.parse(url))
+  
+    json_data = JSON.parse(user_data.body)
+    
+    return json_data
+    
+  end
+  
   def get_tweet(tweet_id)
     
     url = "http://twitter.com/statuses/show/#{tweet_id}.json"

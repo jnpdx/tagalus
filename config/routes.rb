@@ -61,6 +61,9 @@ ActionController::Routing::Routes.draw do |map|
   #sitemap
   map.connect 'sitemap.xml', :controller => 'site_map', :action => 'show'
 
+  #trending
+  map.connect 'trending', :controller => 'trending_on_twitter', :action => 'show'
+
   #backup
   map.connect 'backup_db', :controller => 'backup_controller', :action => 'download_backup'
   
