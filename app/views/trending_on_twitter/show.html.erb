@@ -1,0 +1,58 @@
+<div id="content">
+
+Trending terms
+	<div id="trending_terms">
+
+		<% for trend in @trending['trends'] %>
+			<div class="trending_term">
+			Trend: <%= trend['name'] %><br/>
+			<%
+				if trend['name'].include? ' '
+					next
+				end
+
+				if trend['name'][0] == 35
+					trend['name'] = trend['name'][1..trend['name'].length]
+				end
+
+				@tag = Tag.find_or_initialize_by_the_tag(trend['name'])
+				@d = Definition.new
+
+				@the_tag = trend['name']
+
+				if @tag.id != nil
+		    	@definitions = Definition.find(:all,:order => "authority DESC, created_at ASC", :conditions => { :tag_id => @tag.id })
+				else
+					@definitions = []
+				end
+
+			 %>
+			<% for d in @definitions %>
+				<div class="definition">
+					<div class="gravatar">
+						<img alt="" src="<%= d.user.get_avatar_url %>"/>
+					</div>
+					<div class="authority">
+						Authority:
+						<span id="defs_authority<%= d.id %>" class="def_auth"><%= d.authority %></span>
+					</div>
+					<span class="def_author"><%= d.attribution_text %></span>
+					<div class="vote">
+						<a href='/vote/<%=d.id%>'>Vote as accurate</a>
+					</div>
+					<span class="def"><%= d.texturized_definition %></span>
+				</div>
+			<% end %>
+
+			<%= render :partial => 'layouts/partials/add_definition_form' %>
+
+
+			</div>
+		<% end %>
+	</div>
+	
+	</div>
+
+	<br class="clear_both" />
+	
+</div>
