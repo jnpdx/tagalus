@@ -8,6 +8,19 @@ class AjaxSearchController < ApplicationController
     
     @tags = Tag.find(:all, :conditions => ('the_tag LIKE "%' + search_term +'%"'))
     
+    @search = ActsAsXapian::Search.new [Definition], search_term, {:limit => 10}
+    
+    if @search.results.length != 0
+      @search_defs = @search.results.collect {|r| r[:model]}
+      @search_tags = []
+      
+      for @search_def in @search_defs
+        @search_tags.push @search_def.tag
+      end
+      
+      @tags += @search_tags
+      @tags.uniq!
+    end
     
     for i in @tags
       
