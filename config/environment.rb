@@ -4,12 +4,6 @@
 # you don't control web/app server and can't set it the proper way
 # ENV['RAILS_ENV'] ||= 'production'
 
-if ENV['RAILS_ENV'] == 'production'
-
-config.load_paths += [ ENV['HOME'] + '/ruby_modules' ]
-
-end
-
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 
@@ -21,6 +15,12 @@ Rails::Initializer.run do |config|
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
   # See Rails::Configuration for more options.
+
+  if ENV['RAILS_ENV'] == 'production'
+
+    config.load_paths += [ ENV['HOME'] + '/ruby_modules' ]
+
+  end
 
   # Skip frameworks you're not going to use. To use Rails without a database
   # you must remove the Active Record framework.
