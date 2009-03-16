@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090309024846) do
+ActiveRecord::Schema.define(:version => 20090316024211) do
+
+  create_table "acts_as_xapian_jobs", :force => true do |t|
+    t.string  "model",    :default => "", :null => false
+    t.integer "model_id",                 :null => false
+    t.string  "action",   :default => "", :null => false
+  end
+
+  add_index "acts_as_xapian_jobs", ["model", "model_id"], :name => "index_acts_as_xapian_jobs_on_model_and_model_id", :unique => true
 
   create_table "api_calls", :force => true do |t|
     t.string   "uri"
