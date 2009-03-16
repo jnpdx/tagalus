@@ -18,7 +18,7 @@ Rails::Initializer.run do |config|
 
   if ENV['RAILS_ENV'] == 'production'
 
-    config.load_paths += [ ENV['HOME'] + '/ruby_modules' ]
+    config.load_paths += [ '/home/jnpdx/ruby_modules' ]
 
   end
 
