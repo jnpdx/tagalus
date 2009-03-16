@@ -4,7 +4,7 @@
 # you don't control web/app server and can't set it the proper way
 # ENV['RAILS_ENV'] ||= 'production'
 
-if RAILS_ENV == ‘production’
+if RAILS_ENV == 'production'
 
 config.load_paths += [ ENV['HOME'] + '/ruby_modules' ]
 
