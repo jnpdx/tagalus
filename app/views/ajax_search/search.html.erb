@@ -1,0 +1,42 @@
+<div id="content">
+	
+	<h2>Search results for <%=@search_term%></h2><br/>
+	
+	<% if !@tag_exists %>
+	<div class="search_section">
+	There is no tag for <%=@search_term%> in our database.  <a rel="tag" href="/tag/<%=@search_term%>">Be the first one to define it</a>.
+	</div>
+	<% end %>
+	
+	<div class="search_section">
+	
+	<h3>Tags that have names related to your search</h3>
+	<% if @tags.length != 0 %>
+	<% for tag in @tags %>
+		<div class="search_result">
+			<a href="/tag/<%=tag.the_tag%>"><%=tag.the_tag%></a><br/>
+		</div>
+	<% end %>
+	<% else %>
+		Sorry, but we couldn't find any tags that related to your search
+	<% end %>
+	
+	</div>
+	
+	<div class="search_section">
+	
+	<h3>Tags with definitions that relate to your search</h3>
+	<% if @definitions.length != 0 %>
+	<% for d in @definitions %>
+		<div class="search_result">
+			<a rel="tag" href="/tag/<%=d[:tag].the_tag%>"><%=d[:tag].the_tag%></a><br/>
+			<%=d[:definition].the_definition%>
+		</div>
+	<% end %>
+	<% else %>
+		Sorry, but we couldn't find any definitions related to your search
+	<% end %>
+	
+	</div>
+	
+</div>

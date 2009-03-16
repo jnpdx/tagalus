@@ -1,4 +1,6 @@
 class AjaxSearchController < ApplicationController
+  layout 'main_template', :except => :show
+  
   
   def show
     
@@ -6,7 +8,7 @@ class AjaxSearchController < ApplicationController
     
     search_term = params[:q]
     
-    @tags = Tag.find(:all, :conditions => ('the_tag LIKE "%' + search_term +'%"'))
+    @tags = search_tags(search_term)
     
     @search = ActsAsXapian::Search.new [Definition], search_term, {:limit => 10}
     
@@ -34,14 +36,48 @@ class AjaxSearchController < ApplicationController
   
   def search
     
-    search_term = params[:suggest]
+    @search_term = params[:q]
+    @page_title = "Search for: " + @search_term
     
-    if search_term[0] == 35
-      search_term = search_term[1..search_term.length-1]
+    
+    if @search_term[0] == 35
+      @search_term = @search_term[1..@search_term.length-1]
     end
     
-    redirect_to '/tag/' + search_term
+    @tag_exists = false
     
+    if (@main_tag = Tag.find_by_the_tag(@search_term))
+      @tag_exists = true
+    end
+    
+    @tags = search_tags(@search_term)
+    @definitions = search_definitions(@search_term)
+    
+    #redirect_to '/tag/' + search_term
+    
+  end
+  
+  private
+  
+  def search_tags(search_term)
+    Tag.find(:all, :conditions => ('the_tag LIKE "%' + search_term +'%"'))
+  end
+  
+  def search_definitions(search_term)
+    @search = ActsAsXapian::Search.new [Definition], search_term, {:limit => 100}
+    
+    to_ret = []
+    
+    if @search.results.length != 0
+      @search_defs = @search.results.collect {|r| r[:model]}
+      
+      for @search_def in @search_defs
+        to_ret.push({:tag => @search_def.tag, :definition => @search_def})
+      end
+      
+    end
+    
+    return to_ret
   end
   
 end

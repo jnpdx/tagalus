@@ -11,9 +11,9 @@ Welcome to Tagalus!  <a href='/about'>Learn what it is</a>.  Also, you can <a hr
 		<h2>Find a tag:</h2>
 		
 		<div id="search_box" class="yellow_box">
-		<% form_tag '/search' do %>
+		<% form_tag '/search', :method => :get do %>
 		<!-- ><form id="search_form" name="search_form" method="post" action=""> -->
-		<input size="22" style="position: absolute;" id="suggest" name="suggest" value="#"/>
+		<input size="22" style="position: absolute;" id="suggest" name="q" value="#"/>
 		<input type="submit" value="Search" id="search_button"/>
 		<!--></form> -->
 		<% end %>
@@ -21,7 +21,7 @@ Welcome to Tagalus!  <a href='/about'>Learn what it is</a>.  Also, you can <a hr
 		
 		<div id="main_tags_list">
 			<% for tag in @tags %>
-				<% @definition = Definition.find(:first, :conditions => { :tag_id => tag.id }) %>
+				<% @definition = Definition.find(:first, :order => "authority DESC, created_at ASC", :conditions => { :tag_id => tag.id }) %>
 
 				<div class="tag">
 					<span class="the_tag"><%= link_to (h tag.the_tag), ("/tag/" + tag.the_tag), :rel => 'tag' %></span>
