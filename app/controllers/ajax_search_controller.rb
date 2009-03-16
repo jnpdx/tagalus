@@ -37,7 +37,7 @@ class AjaxSearchController < ApplicationController
   def search
     
     @search_term = params[:q]
-    @page_title = "Search for: " + @search_term
+    @page_title = "Search for " + @search_term
     
     
     if @search_term[0] == 35

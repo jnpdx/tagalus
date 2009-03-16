@@ -1,10 +1,10 @@
 <div id="content">
 	
-	<h2>Search results for <%=@search_term%></h2><br/>
+	<h2>Search results for #<%=@search_term%></h2><br/>
 	
 	<% if !@tag_exists %>
 	<div class="search_section">
-	There is no tag for <%=@search_term%> in our database.  <a rel="tag" href="/tag/<%=@search_term%>">Be the first one to define it</a>.
+	There is no tag for #<%=@search_term%> in our database.  <a href="/tag/<%=@search_term%>">Be the first one to define it</a>.
 	</div>
 	<% end %>
 	
@@ -14,7 +14,7 @@
 	<% if @tags.length != 0 %>
 	<% for tag in @tags %>
 		<div class="search_result">
-			<a href="/tag/<%=tag.the_tag%>"><%=tag.the_tag%></a><br/>
+			<a rel="tag" href="/tag/<%=tag.the_tag%>"><%=tag.the_tag%></a><br/>
 		</div>
 	<% end %>
 	<% else %>
