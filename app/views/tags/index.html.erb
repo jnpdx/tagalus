@@ -58,7 +58,8 @@ Welcome to Tagalus!  <a href='/about'>Learn what it is</a>.  Also, you can <a hr
 	<div id="right_front_box">
 				
 		<%= render :partial => 'layouts/partials/add_tag_form' %>
-		
+		<br/>
+		<span id="tag_counter"><%= Tag.all.length %> tags and counting!</span>
 		
 	</div>
 	

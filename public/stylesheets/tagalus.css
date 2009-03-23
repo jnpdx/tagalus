@@ -1155,3 +1155,8 @@ span.length_notify_box {
   
 }
 
+span#tag_counter {
+  background: white;
+  display: block;
+  padding: 24px 0px 0px 6px;
+}
