@@ -1150,4 +1150,8 @@ div.search_result {
   margin-bottom: 10px;
 }
 
+span.length_notify_box {
+  display: block;
+  
+}
 

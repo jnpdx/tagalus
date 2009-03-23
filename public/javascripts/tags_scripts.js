@@ -32,6 +32,12 @@ $(document).ready(function() {
 	//get_widget('widget_twittertweets');
 	//get_widget('widget_flickrthumbnails')
 	
+	if ($('#new_tag_div').length > 0) {
+	  $('#new_tag_div').keyup(function() { 
+	    length_notify()
+	  });
+	}
+	
 	//SUGGEST
 	
 	$('#suggest').attr('autocomplete','off');
@@ -564,7 +570,38 @@ function display_user_widget_prefs() {
 
 
 
-
+//Lets the user know how many more characters are available
+function length_notify() {
+	
+	var input_box = $('#definition_the_definition');
+	
+	var chars_typed = input_box.val().length;
+	
+	
+	if (chars_typed >= 280) {
+		
+		//input_box.val(input_box.val().substring(0,140));
+		//chars_typed = max_length;
+		
+	}
+	
+	tag_form_div = input_box.parent
+	
+	var char_span = '';
+	
+	if (chars_typed >= 260) {
+		char_span = '<span style="color: red;">';
+	} else {
+		char_span = '<span>';
+	}
+	
+	if (chars_typed == 0) {
+	   $('.length_notify_box').html('');
+	} else {
+		$('.length_notify_box').html(char_span + (280 - chars_typed) + " characters left</span>");
+  }
+	
+}
 
 
 

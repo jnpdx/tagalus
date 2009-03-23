@@ -36,7 +36,7 @@
 @tagalus define #<%= t.text_field:the_tag %> <% end %> <br/> as <br/>
  
 <% fields_for :definition  do |d| %><%= d.text_area :the_definition %><% end %>
-
+<span class="length_notify_box"></span>
 <%= form.submit "Create" %>
 
 	<% end %>
