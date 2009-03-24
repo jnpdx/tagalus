@@ -90,6 +90,11 @@ class TagsController < ApplicationController
       format.xml  { render :xml => @tags }
     end
   end
+  
+  def index_feed
+    @tags = Tag.find(:all, :limit => 5, :order => 'created_at DESC')
+    render :layout => false
+  end
 
   # GET /tags/1
   # GET /tags/1.xml
