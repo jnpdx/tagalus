@@ -2,7 +2,7 @@ development:
   base_db_path: '../xapian'
 
 production:
-  base_db_path: '../shared/xapian'
+  base_db_path: '../../shared/xapian'
 
 test:
   base_db_path: '../xapian'
