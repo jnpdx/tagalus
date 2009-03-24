@@ -23,6 +23,10 @@
 		<% end %>
 
 		<%= auto_discovery_link_tag(:rss, "http://tagal.us/feed", {:title => "All recent Tagalus tags"}) %>
+		
+		<% if (params[:controller] == 'tags') && (params[:action] == 'show') %>
+			<%= auto_discovery_link_tag(:rss, "http://tagal.us/tag/#{@the_tag}/feed", {:title => "Definitions for #{@the_tag}"}) %>
+		<% end %>
 
 		<%= javascript_include_tag :defaults %>
 		<%= javascript_include_tag 'tags_scripts' %>

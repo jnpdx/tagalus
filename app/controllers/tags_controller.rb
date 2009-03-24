@@ -34,24 +34,27 @@ class TagsController < ApplicationController
     #send_email('tagalus@gmail.com', 'Tagalus AutoMail', 'tagalus@gmail.com', 'Tagalus', 'Auto mail', 'this is a test')
 
     #RSS stuff
-    @display_feed = true
+    @display_feed = $display_blog_feed
     
-    require 'rss'
-    begin
-      source = "http://blog.tagal.us/feed" # url or local file
-      content = "" # raw content of rss feed will be loaded here
-      open(source) do |s| content = s.read end
-      @feed_data = RSS::Parser.parse(content, false)
-      @feed_items = @feed_data.items
-      if @feed_data.items.length > 3
-        @feed_items = @feed_data.items[0..2]
-      end
-      if (@feed_data == nil) || (@feed_data.items.length == 0)
+    if @display_feed
+      require 'rss'
+      begin
+        source = "http://blog.tagal.us/feed" # url or local file
+        content = "" # raw content of rss feed will be loaded here
+        open(source) do |s| content = s.read end
+        @feed_data = RSS::Parser.parse(content, false)
+        @feed_items = @feed_data.items
+        if @feed_data.items.length > 3
+          @feed_items = @feed_data.items[0..2]
+        end
+        if (@feed_data == nil) || (@feed_data.items.length == 0)
+          @display_feed = false
+        end
+      rescue 
         @display_feed = false
       end
-    rescue 
-      @display_feed = false
     end
+    
 
     respond_to do |format|
       format.html # index.html.erb
