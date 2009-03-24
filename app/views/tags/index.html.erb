@@ -39,15 +39,7 @@ Welcome to Tagalus!  <a href='/about'>Learn what it is</a>.  Also, you can <a hr
 			<% end %>
 
 			<div class="pagination">
-				<% if @prev_pages %>
-					<a href="?p=<%=@page - 1%>">Prev page</a>
-					<% if @next_pages %>
-					&nbsp;/&nbsp;
-					<% end %>
-				<% end %>
-				<% if @next_pages %>
-					<a href="?p=<%=@page + 1%>">Next page</a>
-				<% end %>
+				<%= will_paginate @tags, :param_name => :p %>
 			</div>
 
 		</div>

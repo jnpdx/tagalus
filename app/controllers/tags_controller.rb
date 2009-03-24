@@ -25,45 +25,11 @@ class TagsController < ApplicationController
     
     @page_title = "Welcome!"
     
-    @page = params[:p]
-    
-    if @page == nil
-      @page = 1
-    else
-      @page = @page.to_i
-    end
-    
     @total_tags = Tag.count
     
+    require 'will_paginate'
     
-    @tags = Tag.find(:all, :order => 'updated_at DESC');
-    
-  
-    @next_pages = false
-    @prev_pages = false
-  
-    if @page > 1
-      @prev_pages = true
-    end
-  
-    if @page == 1
-      range_min = 0
-    else 
-      range_min = ($tags_per_page * (@page - 1)) - 1
-    end
-    
-    range_max = (range_min + $tags_per_page) - 1
-    
-    if range_min < @total_tags
-      if range_max >= @total_tags
-        @tags = @tags[range_min..@total_tags-1]
-      else
-        @tags = @tags[range_min..range_max]
-        @next_pages = true
-      end
-    end
-    
-    
+    @tags = Tag.paginate :page => params[:page], :per_page => $tags_per_page, :order => 'updated_at DESC'
 
     #send_email('tagalus@gmail.com', 'Tagalus AutoMail', 'tagalus@gmail.com', 'Tagalus', 'Auto mail', 'this is a test')
 
