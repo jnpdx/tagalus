@@ -33,9 +33,11 @@ class TagsController < ApplicationController
       @page = @page.to_i
     end
     
+    @total_tags = Tag.count
+    
+    
     @tags = Tag.find(:all, :order => 'updated_at DESC');
     
-    @total_tags = @tags.length
   
     @next_pages = false
     @prev_pages = false
@@ -92,7 +94,7 @@ class TagsController < ApplicationController
   end
   
   def index_feed
-    @tags = Tag.find(:all, :limit => 5, :order => 'created_at DESC')
+    @tags = Tag.find(:all, :limit => 30, :order => 'created_at DESC')
     @tags.reverse!
     render :layout => false
   end
