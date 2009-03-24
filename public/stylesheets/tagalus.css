@@ -283,7 +283,7 @@ div#footer a {
 
 div.pagination {
 	
-	float: right;
+	text-align: right;
 	padding-bottom: 6px;
 	
 }
@@ -595,6 +595,7 @@ div#add_new_def_form {
 	border: 2px solid #bccde3;
 	padding: 10px;
 	margin-bottom: 10px;
+	margin-top: 10px;
 	
 }
 
@@ -1171,6 +1172,12 @@ div#blog_feed {
 
 div#blog_feed ul {
   list-style-type: none;
+}
+
+a.feed_link {
+  font-size: 85%;
+  display: block;
+  text-align: right;
 }
 
 
