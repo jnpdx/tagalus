@@ -1,29 +1,3 @@
-<!--
-
-<div id="new_tag_div">
-<div id="new_tag_form" class="yellow_box">
-	<% form_for :tag, :url => {:controller => 'tags', :action => "create" } do |form| %>
-	  <% fields_for :tag  do |t| %>
-		<%= t.error_messages %>
-		<p>
-			<%= t.text_field:the_tag %>
-	  </p>
-		<% end %>
-		<% fields_for :definition  do |d| %>
-		<%= d.error_messages %>
-		
-		<p>
-	   <%= d.text_area :the_definition %>
-		</p>
-		<% end %>
-	  <p>
-	    <%= form.submit "Create" %>
-	  </p>
-	<% end %>
-</div>
-</div>
-
--->
 
 <div id="new_tag_div">
 	

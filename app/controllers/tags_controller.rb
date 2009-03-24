@@ -78,6 +78,9 @@ class TagsController < ApplicationController
       if @feed_data.items.length > 3
         @feed_items = @feed_data.items[0..2]
       end
+      if (@feed_data == nil) || (@feed_data.items.length == 0)
+        @display_feed = false
+      end
     rescue 
       @display_feed = false
     end
