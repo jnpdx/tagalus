@@ -59,7 +59,20 @@ Welcome to Tagalus!  <a href='/about'>Learn what it is</a>.  Also, you can <a hr
 				
 		<%= render :partial => 'layouts/partials/add_tag_form' %>
 		<br/>
-		<span id="tag_counter"><%= Tag.all.length %> tags and counting!</span>
+		
+		
+		<div id="blog_feed">
+			<% if @display_feed %>
+			<h3>From the <a href="http://blog.tagal.us">Tagalus Blog:</a></h3>
+			<ul>
+			<% for i in @feed_items %>
+				<li><a href="<%=i.link%>"><%=i.title%></a></li>
+			<% end %>
+			</ul>
+			<% end %>
+		</div>
+		
+		<span id="tag_counter"><%= @total_tags %> tags and counting!</span>
 		
 	</div>
 	
