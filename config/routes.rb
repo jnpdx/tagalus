@@ -33,6 +33,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'feed', :controller => 'tags', :action => 'index_feed', :format => :rss
   
   map.connect 'tag/:the_tag', :controller => 'tags', :action => 'show'
+  map.connect 'tag/:the_tag/feed', :controller => 'tags', :action => 'show_feed', :format => :rss
   map.connect 'widget/:widget_title/:the_tag', :controller => 'widget', :action => 'show'
   
   map.connect '/add_tweet', :controller => 'tags', :action => 'add_tweet'

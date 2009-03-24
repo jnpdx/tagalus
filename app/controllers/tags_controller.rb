@@ -93,6 +93,17 @@ class TagsController < ApplicationController
   
   def index_feed
     @tags = Tag.find(:all, :limit => 5, :order => 'created_at DESC')
+    @tags.reverse!
+    render :layout => false
+  end
+
+  def show_feed
+    @tag = Tag.find_by_the_tag(params[:the_tag])
+    if !@tag
+      render :nothing => true, :status => '404 Not Found'
+      return
+    end
+    @definitions = @tag.definitions
     render :layout => false
   end
 
