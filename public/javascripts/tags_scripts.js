@@ -160,7 +160,7 @@ function get_widget(widget_title) {
 					
 				} else {
 				  
-				  rendered_data += '<a class="viewmore" href="http://search.twitter.com/?q=' + escape(window['the_tag']) + '">View more tweets</a>'
+				  rendered_data += '<a class="viewmore" href="http://search.twitter.com/search?q=' + escape(window['the_tag']) + '">View more tweets</a>'
 				  
 				}
 				

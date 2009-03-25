@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
   
-  $display_blog_feed = true
+  $display_blog_feed = false
   
   $tags_per_page = 5
   
