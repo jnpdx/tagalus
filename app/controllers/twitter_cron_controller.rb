@@ -201,7 +201,7 @@ class TwitterCronController < ApplicationController
         next
       end
       
-      if words[3] != 'as'
+      if (words[3] != 'as') && (words[3] != '=')
         to_ret += "how do I define it?<br/>"
         next
       end
