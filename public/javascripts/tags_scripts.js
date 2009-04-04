@@ -148,7 +148,7 @@ function get_widget(widget_title) {
 	
 	if (widget_title == "widget_twittertweets") {
 	  
-	  $.getJSON("http://search.twitter.com/search.json?q=" + escape(window['the_tag']) + "&callback=?",
+	  $.getJSON("http://search.twitter.com/search.json?q=" + escape('#' + window['the_tag'] + " OR @" + window['the_tag']) + "&callback=?",
 	  
 	    function(data) {
 	    
@@ -491,7 +491,7 @@ function refresh_tweets() {
 	
 	var since_tweet = $('#widget_twittertweets').find('.twitter_tweet:first').find('.tweet_id').val();
 	
-	$.getJSON("http://search.twitter.com/search.json?q=" + escape(window['the_tag']) + "&since_id=" + MOST_RECENT_TWEET + "&callback=?",
+	$.getJSON("http://search.twitter.com/search.json?q=" + escape('#' + window['the_tag'] + ' OR @' + window['the_tag']) + "&since_id=" + MOST_RECENT_TWEET + "&callback=?",
 		function (data) {
 			//alert(widget_title);
 
