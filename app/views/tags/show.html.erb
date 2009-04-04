@@ -22,7 +22,7 @@
 				<%	for d in @definitions	%>
 					<div class="definition">
 						<div class="gravatar">
-							<img alt="" src="<%= d.user.get_avatar_url %>"/>
+							<img class="avatar" alt="" src="<%= d.user.get_avatar_url %>"/>
 						</div>
 						<div class="authority">
 							Authority:
@@ -47,7 +47,7 @@
 				<%	for c in @comments	%>
 					<div class="tag_comment">
 						<div class="gravatar">
-							<img alt="" src="<%= c.user.get_avatar_url %>"/>
+							<img class="avatar" alt="" src="<%= c.user.get_avatar_url %>"/>
 						</div>
 						<span class="comment_author"><%= c.attribution_text %></span>
 						<span class="def"><%= c.texturized_comment %></span>
