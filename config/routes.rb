@@ -70,6 +70,8 @@ ActionController::Routing::Routes.draw do |map|
   #backup
   map.connect 'backup_db', :controller => 'backup_controller', :action => 'download_backup'
   
+  #favicon
+  map.connect 'favicon.ico', :controller => 'static_display', :action => 'favicon_redirect'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

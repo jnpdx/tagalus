@@ -8,4 +8,8 @@ class StaticDisplayController < ApplicationController
     
   end
   
+  def favicon_redirect
+    redirect_to '/favicon.png'
+  end
+  
 end
