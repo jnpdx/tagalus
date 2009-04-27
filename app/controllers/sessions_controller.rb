@@ -114,7 +114,7 @@ class SessionsController < ApplicationController
       end
       @user = User.find_or_initialize_by_identity_url('http://twitter.com/' + user_n)
       @user.save
-      #self.current_user = @user
+      self.current_user = @user
       successful_login
     else
       failed_login "Your twitter user/password didn't authenticate"
