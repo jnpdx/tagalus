@@ -108,9 +108,13 @@ class SessionsController < ApplicationController
   
   def twitter_authentication(user_n,pass)
     if authenticate_twitter_user(user_n,pass)
+      #flash[:error] = @user_twitter_name
+      if $user_twitter_name != nil
+        user_n = $user_twitter_name
+      end
       @user = User.find_or_initialize_by_identity_url('http://twitter.com/' + user_n)
       @user.save
-      self.current_user = @user
+      #self.current_user = @user
       successful_login
     else
       failed_login "Your twitter user/password didn't authenticate"

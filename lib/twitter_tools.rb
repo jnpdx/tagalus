@@ -58,6 +58,8 @@ module TwitterTools
       }
     case res
     when Net::HTTPSuccess
+      user_data = JSON.parse(res.body)
+      $user_twitter_name = user_data['screen_name']
       return true
     end
     
