@@ -39,9 +39,16 @@ class User < ActiveRecord::Base
     #return 'test'
     
     if self.identity_url.index('http://twitter.com/') == 0
-      return get_twitvatar_url(self.identity_url[19,self.identity_url.length])
-      #return get_twitvatar_url('test')
+      if self.identity_url.index('@') == nil
+        return get_twitvatar_url(self.identity_url[19,self.identity_url.length])
+        #return get_twitvatar_url('test')
+      else
+        self.email = self.identity_url[19,self.identity_url.length]
+      end
     end
+    
+    
+    
     
     to_hash = self.identity_url;
     if self.email != nil
