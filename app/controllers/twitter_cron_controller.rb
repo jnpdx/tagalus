@@ -256,6 +256,9 @@ class TwitterCronController < ApplicationController
       msg = msg[0..136] + '...'
     end
     
+    RAILS_DEFAULT_LOGGER.info "Sending tweet #{msg}"
+    puts msg
+    
     require 'cgi'
     
     #msg = CGI.escape(msg)
