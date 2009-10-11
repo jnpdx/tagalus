@@ -7,3 +7,4 @@ config/database.yml
 .hg*
 config/deploy.rb
 config/deploy-slice.rb
+db/*.sqlite3
