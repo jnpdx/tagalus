@@ -64,7 +64,7 @@ div.yellow_box {
 div#canvas {
 	
 	font-size: 1.4em;
-	width: 300px;
+	width: 280px;
 	margin-left: 20px;
 	
 
@@ -564,6 +564,10 @@ div#add_new_def_form textarea, div#new_tag_comment_section textarea {
 	
 }
 
+input {
+	max-width: 200px;
+}
+
 input#new_tag {
 	
 	float: left;
@@ -584,7 +588,7 @@ span.length_notify {
 div#user_details {
 	
 	border: 2px solid #aaa;
-	width: 400px;
+	width: 260px;
 	margin: 20px auto;
 	padding: 10px;
 	background: white;

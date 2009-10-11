@@ -7,7 +7,7 @@
 		
 		<%=f.label 'api-key', 'API-Key: '%>
 		<% if @user.api_key != nil %>
-		<%=@user.api_key%><br/><a style="font-size: .8em" href="?new_api_key=true">Generate new key</a>
+			<input type="text" value="<%=@user.api_key%>"/><br/><a style="font-size: .8em" href="?new_api_key=true">Generate new key</a>
 		<% else %>
 		<span style="font-size: .8em">(You must enter an e-mail address to obtain an API key)</span>
 		<% end %>
