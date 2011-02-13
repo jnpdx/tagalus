@@ -49,9 +49,9 @@ class UsersController < ApplicationController
       @user.login = params[:user][:login]
       @user.email = params[:user][:email]
     
-      if (@user.email == nil) || (@user.email == '')
+      #if (@user.email == nil) || (@user.email == '')
         @user.api_key = nil
-      end
+      #end
     
       if try_save
         if @user.save

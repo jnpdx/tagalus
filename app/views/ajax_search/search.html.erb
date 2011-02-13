@@ -25,18 +25,6 @@
 	
 	<div class="search_section">
 	
-	<h3>Tags with definitions that relate to your search</h3>
-	<% if @definitions.length != 0 %>
-	<% for d in @definitions %>
-		<div class="search_result">
-			<a rel="tag" href="/tag/<%=d[:tag].the_tag%>"><%=d[:tag].the_tag%></a><br/>
-			<%=d[:definition].the_definition%>
-		</div>
-	<% end %>
-	<% else %>
-		Sorry, but we couldn't find any definitions related to your search
-	<% end %>
-	
 	</div>
 	
 </div>

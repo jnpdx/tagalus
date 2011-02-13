@@ -5,7 +5,7 @@ class Definition < ActiveRecord::Base
   validates_presence_of :the_definition, :message => "You must enter a definition"
   validates_length_of :the_definition, :maximum => 280, :message => "Definition too long - max 280 characters"
   validates_uniqueness_of :the_definition, :message => "That definition has already been used in Tagalus"
-  acts_as_xapian :texts => [:the_definition]
+  #acts_as_xapian :texts => [:the_definition]
   
   def texturized_definition
     #this will have the url parsing, tag parsing, etc 

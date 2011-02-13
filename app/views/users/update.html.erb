@@ -3,7 +3,7 @@
 	
 	<% form_for :user, @user, :url => '/user-details' do |f| %>
 	
-		<%=f.label 'identity', 'URL: '%><%=@user.identity_url%><br class="clear_both" />
+		<%=f.label 'identity', 'URL: '%><%=@user.identity_url%><br class="clear_both" /><br class="clear_both" />
 		
 		<%=f.label 'api-key', 'API-Key: '%>
 		<% if @user.api_key != nil %>

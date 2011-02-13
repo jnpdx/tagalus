@@ -62,9 +62,9 @@ class User < ActiveRecord::Base
   end
   
   def create_api_key
-    if (self.email != nil) && (self.email != '')
+    #if (self.email != nil) && (self.email != '')
       self.api_key = Time.now.to_i.to_s + gen_key = ActiveSupport::SecureRandom.hex(6)
-    end
+    #end
     return true 
   end
   
